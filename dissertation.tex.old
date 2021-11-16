@@ -15,7 +15,7 @@
 
 \begin{document}
 
-\title{An investigation into the effectiveness and impact of a Continuous Deployment pipeline upon university-level games development teams?}
+\title{Can adoption of rigorous agile methodologies produce less wasted work within game development?}
 
 \author{Frost Donovan}
 
@@ -26,13 +26,14 @@
     \\
     Opening, Challenge, Action, Resolution \\
     \\
+    Games industry has lots of wasted work. \emph{Define wasted work}. Attempt to see if adoptions of agile methodologies can help reduce this amount. Tracking what methodologies teams adopt alongside the amount of wasted work, both as individual assets and in terms of wasted time.
 \end{abstract}
 
 \section{Introduction}
-    
+    What is agile? What methodologies will I be looking at? Why these? Explain more about what is wasted work.
 
 \section{Background \& Supporting Literature}
-    What is CD? Has this been done before? What benefits is it supposed to have? Drawbacks? Links to other things - CI, Unit tests, regular product reviews, stakeholder (supervisor) confidence
+    Go into a level of detail about each agile method I'll be looking at
 
 \section{Research Question}
     From the above sources, I have formed \textbf{The actual question}
@@ -40,7 +41,9 @@
 
 \section{Artifact}
     \subsection{What will be made}
-        CD pipeline utilising Github Actions
+        Artifact to track wasted work
+        track number of assets that have been wasted, as well as overall wasted time
+        Extension: Integration with task tracking software to automate this as much as I can
 
     \subsection{How will I ensure Quality}
         Quality control. Roadmap? Unit Testing? Integration testing?
