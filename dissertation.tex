@@ -32,14 +32,28 @@
 
 \section{Introduction}
     \subsection{What is Continuous Delivery?}
-        CD is an expansion of Continuous Integration (CI), a pipeline for the continuous integration of code, being developed on seperate branches, into the main branch. This code is merged into the main branch and then tested to ensure there are no merge conflicts or obvious errors thrown from the combined code. Assuming all of these tests pass, this merged code is pushed to the project repository. A key part of this pipeline is that the entire process is automated, ensuring minimal time is wasted waiting for tests to run or code to be uploaded. \cite{ContDelIntro,CICDCD} \\
-        CD takes this one step further, in that after a project passes through the CI pipeline, the code is then compiled, packaged, and further tests that require the project to be compiled can be run. These tests should not be run before other tests that don't require compilation due to Fail Fast principles \cite{shore2004fail,bamboo}. Assuming there are no failures during compilation or testing, the built program can then be uploaded to somewhere where it can be easily accessed. Here, it is important to make a distinction between Continuous Delivery, where the build is available internally but not to customers, and Continuous Deployment, where the build is pushed straight out to the current product users. \textbf{WHICH ARE WE LOOKING AT? LIMITATIONS! WANNA DO DELIVERY THAT SHITS SICK WOULD NEED TO GET SET UP WITH BUTLER FOR ITCH, LOOKS EASY THO}
+        CD is an expansion of Continuous Integration (CI), a pipeline for the continuous integration of code, being developed on separate branches, into the main branch. This code is merged into the main branch and then tested to ensure there are no merge conflicts or obvious errors thrown from the combined code. Assuming all of these tests pass, this merged code is pushed to the project repository. A key part of this pipeline is that the entire process is automated, ensuring minimal time is wasted waiting for tests to run or code to be uploaded. \cite{ContDelIntro,CICDCD} \\
+        CD takes this one step further, in that after a project passes through the CI pipeline, the code is then compiled, packaged, and further tests that require the project to be compiled can be run. These tests should not be run before other tests that don't require compilation due to Fail Fast principles \cite{shore2004fail,bamboo}. Assuming there are no failures during compilation or testing, the built program can then be uploaded to somewhere where it can be easily accessed. Here, it is important to make a distinction between Continuous Delivery, where the build is available internally but not to users, and Continuous Deployment, where the build is pushed straight out to the current product users. \textbf{WHICH ARE WE LOOKING AT? LIMITATIONS! WANNA DO DELIVERY THAT SHITS SICK WOULD NEED TO GET SET UP WITH BUTLER FOR ITCH, LOOKS EASY THO} \\
+        core to agile methodology \cite{agilemanifesto}
 
     \subsection{Benefits \& Drawbacks of CD}
-    
+        The primary benefit of CD is reduced cycle time - a reduction in the time it takes for a change in the project to happen and then for the user to have that change applied to their version of the software. This principle is core to the agile methodology, being the very first principle in the agile manifesto \cite{agilemanifesto}. This faster cycle time means that feedback from active users can be obtained much quicker, both on the effectiveness of bug fixes and also on new features. 
+        A benefit of this is not only are players able to see these changes faster, but stakeholders and publishers are able to see development progress, both regularly and on demand. This can be a significant step to building trust between a development studio and publisher, especially if the studio is new or doesn't have an existing relationship with the publisher \cite{gamedevhandbook}.
+        Bug finding, process includes unit tests, runs constant so nowbig batch of bugs just before release. again, patches are to users faster rather than having to wait for next release window
+        
+        Agile is designed to avoid the pitfalls of Waterfall \cite{royce1987managing}, one of which is the commitment of significant time and/ or resources into features that either are unattainable, or not actually wanted by the user. While other agile methods, such as Scrum or Extreme Programming \cite{cohen2004introduction,agilewithscrum}, can be an important part of the agile process, the effectiveness of a development team in delivering \textit{value} is always going to be dependant on the speed and reliability with which user feedback can be obtained. 
+
+        reduced cycle time - gets the product to user faster, allows quicker testing, quicker fixing
+        repeatable and automated - takes less developer time, makes releases reliable due to their frequency. release can take weeks of manual set up \cite{paddy,ContDelIntro}
+
+        stakeholder confidence - seeing progress, and are able to provide feedback earlier
+
+
         holder\cite{ContDelIntro,paddy}
     
 \section{Background \& Supporting Literature}
+    With this in mind it raises two questions; If it is so important, is it being taught to new developers in further education? If it is, is it actually as effective in practice with student teams as it is in theory?
+
     Has this been done before in academic setting\cite{CDCourse2014,CDMobileDev,Tornado,IndustryAcademyDenmark}? 
     Links to other things - CI\cite{CICDCD}, Unit tests, regular product reviews, stakeholder (supervisor) confidence, git flow \cite{gitBranching}
     Best practices\cite{duvall2007continuous}? 
