@@ -77,18 +77,29 @@
         The potential ethical problem could be if the initial results point towards a CD pipeline effecting a students grade, how is that dealt with. Does the experiment carry on as planned, potentially wilfully disadvantaging particular groups of students? While I am uncertain if this would be considered an ethical problem by an ethics board, it could likely provide a moral problem for those involved in running the study. A potential solution could be that those running the experiment would have to be kept in the dark about it's results while it was ongoing to prevent and bias or conflict of interest. While this would certainly require due consideration, it is not a concern for this initial study.
 
         Another limitation is that of resources available. Ideally, every team which a CD pipeline deployed would have support to help customise the pipeline, supporting the team in building custom processes and writing robust unit tests. This would likely give the most 'accurate' imitation of a CD pipeline under industry conditions, however we are unable to provide that level of support due to the research team being a singular individual whom has other commitments, and also lacks the experience to guide teams in writing unit tests specifically.
-    
-    \subsection{Sampling Plan}
-        random sampling within Falmouth University Games Academy game's development teams. Aim is to sample as much of the population as possible, including team's across all three years. Mix of random and convenience sampling - 
 
-        Sample size, sampling method
+    \subsection{Sampling}
+        Random sampling within Falmouth University Games Academy game's development teams. Aim is to sample as much of the population as possible, including team's across all three years. Mix of random and convenience sampling - any team within the GA is eligible, but will mostly be recruiting teams by speaking to teams in the ga as that's the easiest way to communicate. Will likely also get email sent to all students asking them to participate. \\
+        Population is split into four substrata, first years, second years, third years, masters students. Participant teams will then be evenly split between experimental groups who will be given the CD pipeline and control groups. which team's are control groups will be random. This random gathering of participants and assigning of control groups is purposefully to help account for random variation in team skill and cohesion across all potential participant teams.
+
+        Data will initially be treated as a single strata, even numbers across each substrata will be to potentially allow for further analysis on if CD effect vary by year.
+
+        Critical size for statistical significance?
     
     \subsection{Data management plan}
         Data shall be collected using Microsoft Forms as it is GDPR compliant out the box. For any data that is then stored locally, it will be encrypted using GnuPG \cite{encryption} using a SHA256 cipher, with the unencrypted files being deleted using the 'shred' command on Linux.
         Data will be anonymised but matched after it has been collected, with participants names matching to unique ID numbers. The data will then be stored with this ID, rather than anything identifying like a name or email.
     
     \subsection{Data Analysis}
+        Two sample t-test as we are looking for difference between two groups (those with CD \& those without)
+        different tests for each hypothesis
         T-test? Critical size for statistical significance?
+        $\alpha$ error probability should stay at 5 \%
+        $\beta$ error probability has much more flexibility, could reasonably push as low as 80\%
+        pre-test vs post-test could use t test two tailed means difference between two dependant OR F test ANCOVA
+        could potentailly use T test w/ two independant groups for student values due to sample size, supervisor data would need to be matched pairs due to required sample size
+
+        justify effect size - 0.5 is reasonable but need to justify. "only large effects have practical relevance so making test sensitive large effects"
 
     \subsection{Ethical Considerations}
         Due to the nature of this research, there are minimal ethical considerations that need to be taken into account. The participants will not be exposed to any potential risks outside of what they would experience under normal circumstances, although an effort has been made to keep the feedback form fairly condensed. This is to minimise any increased stress that the commitment of having to fill out the form may cause.
@@ -96,18 +107,26 @@
     \section{Appendix}
     Data analysis code, supporting screenshots, list of unit tests \& testing plan
 
-% \section{Artifact}
-%     \subsection{What will be made}
-%         CD pipeline utilising Github Actions. Tool to set up secrets? Would be sick \url{https://docs.github.com/en/rest/reference/actions#secrets} \\
-%         Continuous delivery or continuous deployment? Scope as deployment would need to include itch integration w/ butler, although it looks relatively simple to set up.
-%         Autoupload to steam \& itch! \url{https://itch.io/docs/butler/}
+\section{Artifact}
+    briefly describe artifact
+    make a brief note on quality assurance
+    link to git repo
+    show off any screenshots or code excerpts
 
-%     \subsection{How will I ensure Quality}
-%         Quality control. Roadmap? Unit Testing? Integration testing?
+    More interested in what and how at this stage
 
-%     \subsection{How will I create it}
+    two repo link - one with artifact to easily show off then give link to show it embedded in main project
+    \subsection{What will be made}
+        CD pipeline utilising Github Actions. Tool to set up secrets? Would be sick \url{https://docs.github.com/en/rest/reference/actions#secrets} \\
+        Continuous delivery or continuous deployment? Scope as deployment would need to include itch integration w/ butler, although it looks relatively simple to set up.
+        Auto-upload to steam \& itch! \url{https://itch.io/docs/butler/}
 
-%     \subsection{Why will this answer the questions}
+    \subsection{How will I ensure Quality}
+        Quality control. Roadmap? Unit Testing? Integration testing?
+
+    \subsection{How will I create it}
+
+    \subsection{Why will this answer the questions}
 
 \bibliographystyle{ieeetr}
 \bibliography{bibliography}
