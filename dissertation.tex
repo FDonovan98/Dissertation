@@ -10,6 +10,7 @@
 \usepackage{verbatim}
 \usepackage{graphicx}
 \usepackage{cite}
+\usepackage{xcolor}
 \hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
 % updated with editorial comments 8/9/2021
 
@@ -33,26 +34,19 @@
 \section{Introduction}
     \subsection{What is Continuous Delivery?}
         CD is an expansion of Continuous Integration (CI), a pipeline for the continuous integration of code, being developed on separate branches, into the main branch. This code is merged into the main branch and then tested to ensure there are no merge conflicts or obvious errors thrown from the combined code. Assuming all of these tests pass, this merged code is pushed to the project repository. A key part of this pipeline is that the entire process is automated, ensuring minimal time is wasted waiting for tests to run or code to be uploaded. \cite{ContDelIntro,CICDCD} \\
-        CD takes this one step further, in that after a project passes through the CI pipeline, the code is then compiled, packaged, and further tests that require the project to be compiled can be run. These tests should not be run before other tests that don't require compilation due to Fail Fast principles \cite{shore2004fail,bamboo}. Assuming there are no failures during compilation or testing, the built program can then be uploaded to somewhere where it can be easily accessed. Here, it is important to make a distinction between Continuous Delivery, where the build is available internally but not to users, and Continuous Deployment, where the build is pushed straight out to the current product users. \textbf{WHICH ARE WE LOOKING AT? LIMITATIONS! WANNA DO DELIVERY THAT SHITS SICK WOULD NEED TO GET SET UP WITH BUTLER FOR ITCH, LOOKS EASY THO} \\
+        CD takes this one step further, in that after a project passes through the CI pipeline, the code is then compiled, packaged, and further tests that require the project to be compiled can be run. These tests should not be run before other tests that don't require compilation due to Fail Fast principles \cite{shore2004fail,bamboo}. Assuming there are no failures during compilation or testing, the built program can then be uploaded to somewhere where it can be easily accessed. Here, it is important to make a distinction between Continuous Delivery, where the build is available internally but not to users, and Continuous Deployment, where the build is pushed straight out to the current product users.
         core to agile methodology \cite{agilemanifesto}
 
     \subsection{Benefits \& Drawbacks of CD}
-        The primary benefit of CD is reduced cycle time - a reduction in the time it takes for a change in the project to happen and then for the user to have that change applied to their version of the software. This principle is core to the agile methodology, being the very first principle in the agile manifesto \cite{agilemanifesto}. This faster cycle time means that feedback from active users can be obtained much quicker, both on the effectiveness of bug fixes and also on new features. 
-        A benefit of this is not only are players able to see these changes faster, but stakeholders and publishers are able to see development progress, both regularly and on demand. This can be a significant step to building trust between a development studio and publisher, especially if the studio is new or doesn't have an existing relationship with the publisher \cite{gamedevhandbook}.
-        Bug finding, process includes unit tests, runs constant so nowbig batch of bugs just before release. again, patches are to users faster rather than having to wait for next release window
+        The primary benefit of CD is reduced cycle time - a reduction in the time it takes for a change in the project to happen and then for the user to have that change applied to their version of the software. This principle is core to the agile methodology, being the very first principle in the agile manifesto \cite{agilemanifesto}. This faster cycle time means that feedback from active users can be obtained much quicker, both on the effectiveness of bug fixes and also on new features. Agile is designed to avoid the pitfalls of Waterfall \cite{royce1987managing}, one of which is the commitment of significant time and/ or resources into features that either are unattainable, or not actually wanted by the user. While other agile methods, such as Scrum or Extreme Programming \cite{cohen2004introduction,agilewithscrum}, can be an important part of the agile process, the effectiveness of a development team in delivering \textit{value} is always going to be dependant on the speed and reliability with which user feedback can be obtained. \\
+        A benefit of this fast cycle time is not only are players able to see these changes faster, but stakeholders and publishers are able to see development progress, both regularly and on demand. This can be a significant step to building trust between a development studio and publisher, especially if the studio is new or doesn't have an existing relationship with the publisher \cite{gamedevhandbook}. \\
+        Part of the CD pipeline is testing, with a suite of unit tests being run on the code as part of the build process. As this build process is run consistently, rather than all at once leading up to a main release, this means bugs are found incrementally, stopping the accumulation of technical debt, reducing the cost to fix bugs, and reducing stress on programmers by preventing an overwhelming influx of bugs. While these unit tests will likely catch a lot of bugs, some bugs will only be caught during human playtesting. This decreased cycle time means that human playtesting can happen sooner \& more regularly, and fixes are delivered to testers \& players almost immediately, rather than having to wait for the next release window. \\
         
-        Agile is designed to avoid the pitfalls of Waterfall \cite{royce1987managing}, one of which is the commitment of significant time and/ or resources into features that either are unattainable, or not actually wanted by the user. While other agile methods, such as Scrum or Extreme Programming \cite{cohen2004introduction,agilewithscrum}, can be an important part of the agile process, the effectiveness of a development team in delivering \textit{value} is always going to be dependant on the speed and reliability with which user feedback can be obtained. 
+        Another strength of a Continuous Delivery pipeline is that it is fully automated. This allows less developer time to be spent setting up build or test environments and manually going through the build process, and more time on actually creating the product. This can be a \textit{significant} time save, with some large scale projects reportedly taking weeks to set up environments ready to produce a release build \cite{paddy, ContDelIntro}. This system also significantly reduces the chance that there are any errors caused by mistakes during the build process as this build-release pipeline will have had many iterations of the product pass through it, before a major release deadline. This increases the reliability and stability of new releases. \\
 
-        reduced cycle time - gets the product to user faster, allows quicker testing, quicker fixing
-        repeatable and automated - takes less developer time, makes releases reliable due to their frequency. release can take weeks of manual set up \cite{paddy,ContDelIntro}
-
-        stakeholder confidence - seeing progress, and are able to provide feedback earlier
-
-
-        holder\cite{ContDelIntro,paddy}
     
 \section{Background \& Supporting Literature}
-    With this in mind it raises two questions; If it is so important, is it being taught to new developers in further education? If it is, is it actually as effective in practice with student teams as it is in theory?
+    With these benefits in mind it raises two questions; If a CD pipeline is this important and valuable, is it being taught to new developers in further education? If it is, is it actually as effective in practice with student teams as it is in theory?
 
     Has this been done before in academic setting\cite{CDCourse2014,CDMobileDev,Tornado,IndustryAcademyDenmark}? 
     Links to other things - CI\cite{CICDCD}, Unit tests, regular product reviews, stakeholder (supervisor) confidence, git flow \cite{gitBranching}
@@ -61,10 +55,31 @@
 \section{Research Question}
     From the above sources, I have formed \textbf{The actual question}
     \subsection{hypothesis \& null hypothesis}
+    
+    \section{Research Methodology}
+    \subsection{Experimental Design}
+    
+    \subsection{Limitations}
+    Time, resources
+    
+    \subsection{Sampling Plan}
+    Sample size, sampling method
+    
+    \subsection{Data management plan}
+    Managing, collecting, \& storing data
+    
+    \subsection{Data Analysis}
+    T-test?
+    \subsection{Ethical Considerations}
+    
+    \section{Appendix}
+    Data analysis code, supporting screenshots, list of unit tests \& testing plan
 
+\color{red}
 \section{Artifact}
     \subsection{What will be made}
         CD pipeline utilising Github Actions. Tool to set up secrets? Would be sick \url{https://docs.github.com/en/rest/reference/actions#secrets} \\
+        Continuous delivery or continuous deployment? Scope as deployment would need to include itch integration w/ butler, although it looks relatively simple to set up.
         Autoupload to steam \& itch! \url{https://itch.io/docs/butler/}
 
     \subsection{How will I ensure Quality}
@@ -74,25 +89,7 @@
 
     \subsection{Why will this answer the questions}
 
-\section{Research Methodology}
-    \subsection{Experimental Design}
-
-    \subsection{Limitations}
-        Time, resources
-
-    \subsection{Sampling Plan}
-        Sample size, sampling method
-
-    \subsection{Data management plan}
-        Managing, collecting, \& storing data
-
-    \subsection{Data Analysis}
-        T-test?
-    \subsection{Ethical Considerations}
-
-\section{Appendix}
-    Data analysis code, supporting screenshots, list of unit tests \& testing plan
-
+\color{black}
 \bibliographystyle{ieeetr}
 \bibliography{bibliography}
 
