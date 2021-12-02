@@ -12,6 +12,7 @@
 \usepackage{cite}
 \usepackage{xcolor}
 \usepackage{parskip}
+\usepackage{amsthm}
 \hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
 % updated with editorial comments 8/9/2021
 
@@ -65,14 +66,14 @@
     From the above sources, there is a clear need for research into the practical effects of a Continuous Delivery pipeline within game development and game development education. From this knowledge, I propose this initial investigation into the effects of a Continuous Delivery pipeline upon university-level games development teams, with a focus on the confidence of the team, as well as the confidence of the team's academic supervisor in their team. 
     This is purposefully broad, with the aim of encouraging and supporting further research into the topic. Given this, the following hypothesises will be investigated.
 
-    \begin{itemize}
+    \begin{enumerate}
         \item The use of a CD pipeline will increase a supervisors confidence in their team's ability to deliver a new, working build each week. (Q.S1)
         \item The team's confidence and the supervisors confidence in being able to achieve everything within the scope of the project will be much more closely related with the use of a CD pipeline.(Q.S2,St1 plotted against time)
-        \item A CD pipeline will help the development team understand the current state of the project (Q.St2)
+        \item A CD pipeline will help developers understand the current state of the project (Q.St2)
         \item A CD pipeline will help developers to always know why the work they are doing is being done (Q.St3)
         \item A team using a CD pipeline will refine their scope more often (Q.St4)
         \item A team using a CD pipeline will do more playtesting
-    \end{itemize}
+    \end{enumerate}
 
 \section{Research Methodology}
     \subsection{Experimental Design}
@@ -95,19 +96,94 @@
         Critical size for statistical significance?
     
     \subsection{Data management plan}
-        Data shall be collected using Microsoft Forms as it is GDPR compliant out the box. It will then be stored using Microsoft Onedrive, another application that is GDPR compliant out the box.
+        Data shall be collected using Microsoft Forms as it is GDPR compliant out the box. It will then be stored using Microsoft One Drive, another application that is GDPR compliant out the box.
         Data will be anonymised but matched after it has been collected, with participants names matching to unique ID numbers. The data will then be stored with this ID, rather than anything identifying like a name or email.
     
     \subsection{Data Analysis}
+        only one result pre-test while ~10 results post-test
+        Not enough data pre-test to make meaningful conclusions?
+        state of project is not comparative
+
+        study is initial investigation - could run matched pairs \& try and test all H's but then talk about the lack of pre-test data and that these things would likely change as  project progress's and a team move's through stages of team forming \textbf{cite for team forming stages}, so results may be indicative but not conclusive. Could provide a base for further research but not to be taken without consideration of limitations 
+        Could introduce CD pipeline later? Gather pre-test data up to the end of Feb (4 feedbacks), then implement pipeline first week of march, and then gather post-test data up to end of March (4 feedbacks)
+        sample size for matched is 34 - 34 \textit{groups} would be around 2/3 the GA at a rough guess.. potentially doable, would need to run first form week starting Jan 10th so could gather as many groups as possible up to then and then decide? Have two plans dependant on the number of participants I can secure. If I can secure 34 groups would get H's based on individuals to Power of 0.9999969 assuming 5 people per group respond to survey which would likely low
+        Could use ANOVA w/ repeated measurements between factors. One group has CD pipeline one is control group - two groups are independent (it's different teams in each group) so it is between factors not within factors test \url{https://carvadia.com/what-is-the-difference-between-a-within-subjects-anova-and-a-between-subjects-anova/}. Give's a req sample size of 20 with 8 measures. This would let me run all hypothesises with control \& experiment group! Nice! michaels advice was to use f of 0.4 as that is Cohen's recommended value (https://www2.psych.ubc.ca/~schaller/528Readings/Cohen1992.pdf)
+        http://www.mormonsandscience.com/gpower-guide.html
+
+        \begin{figure}[h!]
+            \includegraphics[width=0.5\textwidth]{Images/ANOVA_2.png}
+            \caption{Screen capture from GPower software showing sample size caluclation for a two tailed, matched pair t test}
+            \label{ANOVArepeatedbetween}
+        \end{figure}
+
+        \textit{The use of a CD pipeline will increase a supervisors confidence in their team's ability to deliver a new, working build each week.} \\
+            Q.S1
+            matched pair
+            Sample size is in groups
+            t-test
+            two tailed as we care about if it reduces the supervisors confidence as that would be bad
+            80\% Power
+            Total sample size is likely too high to be feasible
+            \begin{figure}[h!]
+                \includegraphics[width=0.5\textwidth]{Images/GPower_Matched.png}
+                \caption{Screen capture from GPower software showing sample size caluclation for a two tailed, matched pair t test}
+                \label{twotailmatchedpair}
+            \end{figure}
+
+        \textit{The team's confidence and the supervisors confidence in being able to achieve everything within the scope of the project will be more closely related with the use of a CD pipeline} \\
+            Q.S2 \& Q.St1 plotted against time
+            independent, matched pairs wouldn't work as this confidence \& the scope will change as the project progresses and the amount of time left decreases \& it becomes easier to estimate. Although this becomes easier for the team \& the supervisor.
+            Could potentially do matched pairs
+            sample size is in groups
+            take average difference each month, compare experimental against control group
+            \begin{figure}[h!]
+                \includegraphics[width=0.5\textwidth]{Images/GPower_Independent.png}
+                \caption{Screen capture from GPower software showing sample size caluclation for H2}
+                \label{twotailindependent}
+            \end{figure}
+
+        \textit{A CD pipeline will help developers understand the current state of the project} \\
+            Q.St2
+            two tailed, matched pair
+            sample size is individual not group
+            compare pre test to post test at start, mid, and end
+            not convinced I'll be able to say with confidence using matched pair due to lack of pre-test data
+            see figure \ref{twotailmatchedpair}
+
+            Could do two independent groups
+            much more meaningful data at getting a more true comparison
+            sample size is \textit{potentially} do able
+            see figure \ref{twotailindependent}
+
+
+        \textit{A CD pipeline will help developers to always know why the work they are doing is being done} \\
+            Q.St3
+            sample size is individual not group
+            potentially feasible to run independent groups
+            see figure \ref{twotailindependent}
+
+        \textit{A team using a CD pipeline will refine their scope more often} \\
+            Q.St4
+            sample size is group not individual
+            likely not feasible
+
+            see figure \ref{twotailindependent}
+
+        \textit{A team using a CD pipeline will do more playtesting} \\
+            Q.St5
+            sample size is group not individual
+            independent as the state of the project will change so playtesting priority will not be constant
+            see figure \ref{twotailindependent}
+    
         Two sample t-test as we are looking for difference between two groups (those with CD \& those without)
         different tests for each hypothesis
         T-test? Critical size for statistical significance?
         $\alpha$ error probability should stay at 5 \%
         $\beta$ error probability has much more flexibility, could reasonably push as low as 80\%
         pre-test vs post-test could use t test two tailed means difference between two dependant OR F test ANCOVA
-        could potentailly use T test w/ two independant groups for student values due to sample size, supervisor data would need to be matched pairs due to required sample size
+        could potentailly use T test w/ two independent groups for student values due to sample size, supervisor data would need to be matched pairs due to required sample size
 
-        justify effect size - 0.5 is reasonable but need to justify. "only large effects have practical relevance so making test sensitive large effects"
+        justify effect size - 0.5 is reasonable but need to justify. "only large effects have practical relevance so making test sensitive to large effects"
 
     \subsection{Ethical Considerations}
         Due to the nature of this research, there are minimal ethical considerations that need to be taken into account. The participants will not be exposed to any potential risks outside of what they would experience under normal circumstances, although an effort has been made to keep the feedback form fairly condensed. This is to minimise any increased stress that the commitment of having to fill out the form may cause.
