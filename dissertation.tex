@@ -67,124 +67,69 @@
     This is purposefully broad, with the aim of encouraging and supporting further research into the topic. Given this, the following hypothesises will be investigated.
 
     \begin{enumerate}
-        \item The use of a CD pipeline will increase a supervisors confidence in their team's ability to deliver a new, working build each week. (Q.S1)
-        \item The team's confidence and the supervisors confidence in being able to achieve everything within the scope of the project will be much more closely related with the use of a CD pipeline.(Q.S2,St1 plotted against time)
-        \item A CD pipeline will help developers understand the current state of the project (Q.St2)
-        \item A CD pipeline will help developers to always know why the work they are doing is being done (Q.St3)
-        \item A team using a CD pipeline will refine their scope more often (Q.St4)
-        \item A team using a CD pipeline will do more playtesting
+        \item \label{h1} The use of a CD pipeline will increase a supervisors confidence in their team's ability to deliver a new, working build each week. (Q.S1)
+        \item \label{h2} The team's confidence and the supervisors confidence in being able to achieve everything within the scope of the project will be much more closely related with the use of a CD pipeline.(Q.S2,St1 plotted against time)
+        \item \label{h3} A CD pipeline will help developers understand the current state of the project (Q.St2)
+        \item \label{h4} A CD pipeline will help developers to always know why the work they are doing is being done (Q.St3)
+        \item \label{h5} A team using a CD pipeline will refine their scope more often (Q.St4)
+        \item \label{h6} A team using a CD pipeline will do more playtesting
     \end{enumerate}
 
 \section{Research Methodology}
     \subsection{Experimental Design}
+        Environmental variation will be accounted for as all student team's within the study will be taken from the same population, Falmouth University Game's Academy. There may, however, be a relevant strata within this population that is not being accounted for, and that is the academic year the development team is in.
         
-
+        Environmental concerns will be accounted for as all students are taken from the same department at same university so are part of same strata. 
+        variation in sub-strata (year group)? This is being ignored due to limitations - there are only ~15 team's per year so getting a sample size of 30 in a single year is not possible. Fully randomised design
+        one hypothesis maps to one question on survey, apart from h2 which maps to two questions
+    
+    
     \subsection{Limitations}
         The primary limitation in this study is time. If this study were to be expanded, I would ideally like to follow team's from their first year all the way through to graduation, introducing half of the teams to the CD pipeline immediately and then tracking their results, feedback, and attitudes across all three years against the control groups. This could also be done across multiple cohorts, providing increased statistical significance and helping to account for random variation within team's cohesion and skill level. I could also foresee a technical and potentially ethical problem with this approach however.
         
         Technically, within Falmouth University Game's Academy, the department where these studies have taken place, teams are not the same each year, they are randomised. This would mean it would be impossible to track the same 'team', although potentially individuals could be tracked and seeing if they implemented CD pipelines of their own accord in future teams could also be a revealing statistic to look at, as it would likely give a measure of \textit{perceived} value, rather than actual value. \\
         The potential ethical problem could be if the initial results point towards a CD pipeline effecting a students grade, how is that dealt with. Does the experiment carry on as planned, potentially wilfully disadvantaging particular groups of students? While I am uncertain if this would be considered an ethical problem by an ethics board, it could likely provide a moral problem for those involved in running the study. A potential solution could be that those running the experiment would have to be kept in the dark about it's results while it was ongoing to prevent and bias or conflict of interest. While this would certainly require due consideration, it is not a concern for this initial study.
-
+        
         Another limitation is that of resources available. Ideally, every team which a CD pipeline deployed would have support to help customise the pipeline, supporting the team in building custom processes and writing robust unit tests. This would likely give the most 'accurate' imitation of a CD pipeline under industry conditions, however we are unable to provide that level of support due to the research team being a singular individual whom has other commitments, and also lacks the experience to guide teams in writing unit tests specifically.
-
-    \subsection{Sampling}
-        Random sampling within Falmouth University Games Academy game's development teams. Aim is to sample as much of the population as possible, including team's across all three years. Mix of random and convenience sampling - any team within the GA is eligible, but will mostly be recruiting teams by speaking to teams in the ga as that's the easiest way to communicate. Will likely also get email sent to all students asking them to participate. \\
-        Population is split into four substrata, first years, second years, third years, masters students. Participant teams will then be evenly split between experimental groups who will be given the CD pipeline and control groups. which team's are control groups will be random. This random gathering of participants and assigning of control groups is purposefully to help account for random variation in team skill and cohesion across all potential participant teams.
-
-        Data will initially be treated as a single strata, even numbers across each substrata will be to potentially allow for further analysis on if CD effect vary by year.
-
-        Critical size for statistical significance?
     
-    \subsection{Data management plan}
+    \subsection{Sampling}
+        Random sampling within Falmouth University Games Academy game's development teams. Aim is to sample as much of the population as possible, including team's across all four years. Mix of random and convenience sampling - any team within the GA is eligible, but will mostly be recruiting teams by speaking to teams in the ga as that's the easiest way to communicate. Will likely also get email sent to all students asking them to participate. \\
+
+        Population is split into four substrata, first years, second years, third years, masters students. Participant teams will then be evenly split between experimental groups who will be given the CD pipeline and control groups. which team's are control groups will be random. This random gathering of participants and assigning of control groups is purposefully to help account for random variation in steam skill and cohesion across all potential participant teams.
+        
+        \subsection{Data management plan}
         Data shall be collected using Microsoft Forms as it is GDPR compliant out the box. It will then be stored using Microsoft One Drive, another application that is GDPR compliant out the box.
         Data will be anonymised but matched after it has been collected, with participants names matching to unique ID numbers. The data will then be stored with this ID, rather than anything identifying like a name or email.
     
     \subsection{Data Analysis}
-        only one result pre-test while ~10 results post-test
-        Not enough data pre-test to make meaningful conclusions?
-        state of project is not comparative
+        All six hypothesis will be analysed using ANOVA with repeated measurements \& between factors. This is an expansion of the dependant t test \cite{carvadiaANOVA} which allows us to utilise the repeat measurements we will be taking. As we will be running this study with two distinct groupings of teams; teams that have access to the CD pipeline, and teams that do not (and thus are in the control group), this allows us to use the 'between factors', rather than 'within factors' test \cite{carvadiaANOVA}. \\
+        Having determined an appropriate test type, we can then make use of GPower Software\cite{faul2007g,faul2009statistical}, alongside a comprehensive GPower guide \cite{gpowerguide}, to determine an effective sample size. First, we must provide the software with a number of parameters, which at this stage will be estimates based on our expected results, although after our data has been gathered we will revisit this and calculate these values in order to calculate the actual power of our results. The variables, along with the values we will be providing, are as follows.
 
-        study is initial investigation - could run matched pairs \& try and test all H's but then talk about the lack of pre-test data and that these things would likely change as  project progress's and a team move's through stages of team forming \textbf{cite for team forming stages}, so results may be indicative but not conclusive. Could provide a base for further research but not to be taken without consideration of limitations 
-        Could introduce CD pipeline later? Gather pre-test data up to the end of Feb (4 feedbacks), then implement pipeline first week of march, and then gather post-test data up to end of March (4 feedbacks)
-        sample size for matched is 34 - 34 \textit{groups} would be around 2/3 the GA at a rough guess.. potentially doable, would need to run first form week starting Jan 10th so could gather as many groups as possible up to then and then decide? Have two plans dependant on the number of participants I can secure. If I can secure 34 groups would get H's based on individuals to Power of 0.9999969 assuming 5 people per group respond to survey which would likely low
-        Could use ANOVA w/ repeated measurements between factors. One group has CD pipeline one is control group - two groups are independent (it's different teams in each group) so it is between factors not within factors test \url{https://carvadia.com/what-is-the-difference-between-a-within-subjects-anova-and-a-between-subjects-anova/}. Give's a req sample size of 20 with 8 measures. This would let me run all hypothesises with control \& experiment group! Nice! michaels advice was to use f of 0.4 as that is Cohen's recommended value (https://www2.psych.ubc.ca/~schaller/528Readings/Cohen1992.pdf)
-        http://www.mormonsandscience.com/gpower-guide.html
-        corr among rep measures of 0.5 - high variance with time reduced correlation as teams move through four stages of team forming \textbf{cite} especially as using not just third year teams so higher chance of teams being new and not having had long working together, esp w/ first years. Also as projects move through majority of lifecycle over course of study. 0.5 is recommended value for strong correlation
+        \subsubsection*{Effect Size f}
+            This is the expected effect size we expect to see from our intervention. We are using a value of 0.4 here as this is the recommended value for a large effect size \cite{cohen1992power}, and as we are investigating practical relevance we care far more about large effects than effects that would be too small to provide practical relevance.\\
+
+        \subsubsection*{$\alpha$ error probability}
+            This will remain at the default value of 5\% as this is our probability of getting a type I error, also known as a false positive\cite{errortype}.\\
+
+        \subsubsection*{Power}
+            As this study is intended as an exploratory study, we will be accepting a power of 0.8. This will enable us to say with an 80\% certainty that we will not get a Type II error, also known as a false negative\cite{errortype}.\\
+
+        \subsubsection*{Number of groups}
+            We will have two groups, our control group who have no access to a CD pipeline, and our experimental group who are provided with the CD pipeline.\\
+
+        \subsubsection*{Number of measurements}
+            We are planning on collecting eight sets of measurements, one every two weeks from January through to March.\\
+            
+        \subsubsection*{Correlation among repeated measures}
+            We will be using the default value of 0.5 here. This is the recommended value for a moderate to high correlation \cite{gpowerguide} which is to be expected. We will not be using a higher value as we expect some level of variation due to the project moving through a significant part of its lifecycle during the period we are monitoring, as well as variation due to team's becoming more accustomed to working together and moving through the four stages of team forming \cite{tuckman1965developmental}. This will be especially prevalent in first and second year teams, as they are more likely to of not worked together due to how Falmouth University Game's Academy operates.\\
+
+        Using these values, we receive a required sample size of thirty participants (see figure \ref{ANOVArepeatedbetween}). While this is realistic for hypothesis regarding individuals, see hypothesis \ref{h3} and \ref{h4}, this will be more challenging for the rest of the hypothesises as they relate to teams as a whole, meaning we would require 30 \textit{teams}, not individuals. This is potentially possible, but will require the participation of two thirds of the entire population of Falmouth University Game's Academy.
 
         \begin{figure}[h!]
-            \includegraphics[width=0.5\textwidth]{Images/ANOVA_2.png}
-            \caption{Screen capture from GPower software showing sample size caluclation for a two tailed, matched pair t test}
+            \includegraphics[width=\columnwidth]{Images/ANOVA_2.png}
+            \caption{Screen capture from GPower software showing sample size calculation for an \textit{ANOVA: repeated measurements, between factors} test}
             \label{ANOVArepeatedbetween}
         \end{figure}
-
-        \textit{The use of a CD pipeline will increase a supervisors confidence in their team's ability to deliver a new, working build each week.} \\
-            Q.S1
-            matched pair
-            Sample size is in groups
-            t-test
-            two tailed as we care about if it reduces the supervisors confidence as that would be bad
-            80\% Power
-            Total sample size is likely too high to be feasible
-            \begin{figure}[h!]
-                \includegraphics[width=0.5\textwidth]{Images/GPower_Matched.png}
-                \caption{Screen capture from GPower software showing sample size caluclation for a two tailed, matched pair t test}
-                \label{twotailmatchedpair}
-            \end{figure}
-
-        \textit{The team's confidence and the supervisors confidence in being able to achieve everything within the scope of the project will be more closely related with the use of a CD pipeline} \\
-            Q.S2 \& Q.St1 plotted against time
-            independent, matched pairs wouldn't work as this confidence \& the scope will change as the project progresses and the amount of time left decreases \& it becomes easier to estimate. Although this becomes easier for the team \& the supervisor.
-            Could potentially do matched pairs
-            sample size is in groups
-            take average difference each month, compare experimental against control group
-            \begin{figure}[h!]
-                \includegraphics[width=0.5\textwidth]{Images/GPower_Independent.png}
-                \caption{Screen capture from GPower software showing sample size caluclation for H2}
-                \label{twotailindependent}
-            \end{figure}
-
-        \textit{A CD pipeline will help developers understand the current state of the project} \\
-            Q.St2
-            two tailed, matched pair
-            sample size is individual not group
-            compare pre test to post test at start, mid, and end
-            not convinced I'll be able to say with confidence using matched pair due to lack of pre-test data
-            see figure \ref{twotailmatchedpair}
-
-            Could do two independent groups
-            much more meaningful data at getting a more true comparison
-            sample size is \textit{potentially} do able
-            see figure \ref{twotailindependent}
-
-
-        \textit{A CD pipeline will help developers to always know why the work they are doing is being done} \\
-            Q.St3
-            sample size is individual not group
-            potentially feasible to run independent groups
-            see figure \ref{twotailindependent}
-
-        \textit{A team using a CD pipeline will refine their scope more often} \\
-            Q.St4
-            sample size is group not individual
-            likely not feasible
-
-            see figure \ref{twotailindependent}
-
-        \textit{A team using a CD pipeline will do more playtesting} \\
-            Q.St5
-            sample size is group not individual
-            independent as the state of the project will change so playtesting priority will not be constant
-            see figure \ref{twotailindependent}
-    
-        Two sample t-test as we are looking for difference between two groups (those with CD \& those without)
-        different tests for each hypothesis
-        T-test? Critical size for statistical significance?
-        $\alpha$ error probability should stay at 5 \%
-        $\beta$ error probability has much more flexibility, could reasonably push as low as 80\%
-        pre-test vs post-test could use t test two tailed means difference between two dependant OR F test ANCOVA
-        could potentailly use T test w/ two independent groups for student values due to sample size, supervisor data would need to be matched pairs due to required sample size
-
-        justify effect size - 0.5 is reasonable but need to justify. "only large effects have practical relevance so making test sensitive to large effects"
 
     \subsection{Ethical Considerations}
         Due to the nature of this research, there are minimal ethical considerations that need to be taken into account. The participants will not be exposed to any potential risks outside of what they would experience under normal circumstances, although an effort has been made to keep the feedback form fairly condensed. This is to minimise any increased stress that the commitment of having to fill out the form may cause.
