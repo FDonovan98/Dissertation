@@ -35,5 +35,6 @@ for row in parsedText:
 # - dictionary of all supervisor email's
 # - NONONO way overcomplicating it
 # - just include a field on each survey to select the team & hash with that. so much simpler
+# - will also need to map groups to if they are experimental or not and include that as a column
 for row in parsedText:
     print(row)
