@@ -35,6 +35,9 @@
 \end{abstract}
 
 \section{Introduction}
+The intention of this paper is to act as an initial investigation into the effects of a Continuous Delivery (CD) pipeline on student development team's. Student team's often have a problem with project scope and reliability of delivering regular builds, which the reported benefits of CD should help with. As such, this study will consist of a case study of a number of student team's within Falmouth University Games Academy across the entire department, with half the participating team's being provided with a CD pipeline and data being gathered throughout the study by survey. Through this study we will seek to provide some initial answers to whether a CD pipeline can positively effect developer \& project supervisor confidence, understanding of the project's state, and project scope.
+
+\section{An analysis of Continuous Delivery}
 \subsection{What is Continuous Delivery?}
 Continuous Delivery (CD) is an expansion of Continuous Integration (CI), a pipeline for the continuous integration of code, being developed on separate branches, into the main branch. This code is merged into the main branch and then tested to ensure there are no merge conflicts or obvious errors thrown from the combined code. Assuming all of these tests pass, this merged code is pushed to the project repository. A key part of this pipeline is that the entire process is automated, ensuring minimal time is wasted waiting for tests to run or code to be uploaded.\cite{ContDelIntro,CICDCD} \\
 CD takes this one step further, in that after a project passes through the CI pipeline, the code is then compiled, packaged, and further tests that require the project to be compiled can be run. These tests should not be run before other tests that don't require compilation due to Fail Fast principles\cite{shore2004fail,bamboo}. Assuming there are no failures during compilation or testing, the built program can then be uploaded to somewhere where it can be easily accessed. Here, it is important to make a distinction between Continuous Delivery, where the build is available internally but not to users, and Continuous Deployment, where the build is pushed straight out to the current product users. This practice is core to the agile methodology, in fact being the first point on the agile manifesto\cite{agilemanifesto}.
@@ -47,7 +50,7 @@ Part of the CD pipeline is testing, with a suite of unit tests being run on the 
 
 Another strength of a Continuous Delivery pipeline is that it is fully automated. This allows less developer time to be spent setting up build or test environments and manually going through the build process, and more time on actually creating the product. This can be a \textit{significant} time save, with some large scale projects reportedly taking weeks to set up environments ready to produce a release build\cite{paddy, ContDelIntro}. This system also significantly reduces the chance that there are any errors caused by mistakes during the build process as this build-release pipeline will have had many iterations of the product pass through it, before a major release deadline. This increases the reliability and stability of new releases.
 
-\section{Background \& Supporting Literature}
+\section{Case Studies \& Supporting Literature}
 With these benefits in mind it raises two questions; \\
 If a CD pipeline is this important and valuable, is it being taught to new developers in further education?, and \\
 If it is, is it actually as effective in practice with student teams as it is in theory?
