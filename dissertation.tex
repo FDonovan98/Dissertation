@@ -192,30 +192,47 @@ Due to the nature of this research, there are minimal ethical considerations tha
 The artifact itself is of minimal risk, as it is collecting no personal information and does not have the potential to be weaponised. \\
 Given these two factors, the project has been deemed medium risk and has such has been signed off by the research project Supervisor, Dr Michael Scott, in consultation with the Head of Subject, Dr Michael Scott, in accordance with Falmouth University's ethics policy\cite{falethicspolicy}.
 
-\section{Appendix}
-Data analysis code, supporting screenshots, list of unit tests \& testing plan
 
 \section{Artifact}
-\textbf{This is not being marked so from here it's just notes for me}
-briefly describe artifact
-make a brief note on quality assurance
-link to git repo
-show off any screenshots or code excerpts
+The artifact to be produced will be the Continuous Delivery pipeline that will be supplied to the experimental team's. This will be designed to take advantage of the version control software used within Falmouth University Games Academy, Github Enterprise\cite{gitenterprise}. This pipeline will be built using Github Actions\cite{gitactions}, an automation system built into Github, and GameCI\cite{gameci}, a CI/ CD api designed for automated build and testing of Unity projects. The pipeline shall consist of 5 main stages. These are detailed below, and the pipeline flow is shown in the Appendix, figure \ref{CDflow}. This flow can be seen in action on a live project at the following link: \url{https://github.falmouth.ac.uk/Glass-Nomad-Games/Silverback}.\\
 
-More interested in what and how at this stage
+\subsubsection*{Generate daily pull request}
+At midnight each night the main branch is compared against the stable branch. If main is ahead of stable then a pull request is created.\\
 
-two repo link - one with artifact to easily show off then give link to show it embedded in main project
-\subsection{What will be made}
-CD pipeline utilising Github Actions. Tool to set up secrets? Would be sick \url{https://docs.github.com/en/rest/reference/actions#secrets} \\
-Continuous delivery or continuous deployment? Scope as deployment would need to include itch integration w/ butler, although it looks relatively simple to set up.
-Auto-upload to steam \& itch! \url{https://itch.io/docs/butler/}
+\subsubsection*{Unit tests}
+Any tests included with the project are then run. These could include frame rate benchmarking, weapon testing, or spawn testing.\\
 
-\subsection{How will I ensure Quality}
-Quality control. Roadmap? Unit Testing? Integration testing?
+\subsubsection*{Generate and upload build}
+Once all unit tests pass, a build is then created and uploaded as a Github artifact\cite{gitartifacts}. This could also be expanded to include automatic uploading to Steam, as done on the live project above, using the Steamworks SDK\cite{steamupload} or to Itch using Butler\cite{itchupload}, but is potentially out of scope for the current project.\\
 
-\subsection{How will I create it}
+\subsubsection*{Merge pull request}
+If the build is created and uploaded successfully, the opened pull request is then merged and closed.\\
 
-\subsection{Why will this answer the questions}
+
+% make a brief note on quality assurance
+% show off any screenshots or code excerpts
+
+% More interested in what and how at this stage
+
+% two repo link - one with artifact to easily show off then give link to show it embedded in main project
+% \subsection{What will be made}
+% CD pipeline utilising Github Actions. Tool to set up secrets? Would be sick \url{https://docs.github.com/en/rest/reference/actions#secrets} \\
+% Continuous delivery or continuous deployment? Scope as deployment would need to include itch integration w/ butler, although it looks relatively simple to set up.
+% Auto-upload to steam \& itch! \url{https://itch.io/docs/butler/}
+
+% \subsection{How will I ensure Quality}
+% Quality control. Roadmap? Unit Testing? Integration testing?
+
+% \subsection{How will I create it}
+
+% \subsection{Why will this answer the questions}
+
+\section{Appendix}
+\begin{figure}[h!]
+    \includegraphics[width=0.95\columnwidth]{Images/CD.png}
+    \caption{A diagram showing the flow of the Continuous Delivery system}
+    \label{CDflow}
+\end{figure}
 
 \bibliographystyle{IEEEtran}
 \bibliography{bibliography}
