@@ -83,8 +83,12 @@ Moving to the paper's conclusion, There are two main statistics which seem to st
 % Links to other things - CI\cite{CICDCD}, Unit tests, regular product reviews, stakeholder (supervisor) confidence, git flow\cite{gitBranching}
 % Best practices\cite{duvall2007continuous}? 
 
-\section{Hypothesis}
+\section{Research Question \& Hypothesis}
 From the above sources, there is a clear need for research into the practical effects of a Continuous Delivery pipeline within game development and game development education. From this knowledge, I propose this initial investigation into the effects of a Continuous Delivery pipeline upon university-level games development teams, with a focus on the confidence of the team, as well as the confidence of the team's academic supervisor in their team.
+From this proposal, we can draw the research question.
+
+\textit{Will the introduction of a continuous delivery pipeline to university-level game development team's have a positive impact on the team's confidence, and on the supervisor's confidence in the team, through improving the team's awareness and understanding of the current state and scope of the project?}
+
 This is purposefully broad, with the aim of encouraging and supporting further research into the topic. Given this, the following hypothesises will be investigated.
 
 \begin{enumerate}
@@ -152,7 +156,9 @@ We are planning on collecting six sets of measurements, one every two weeks from
 
 % https://www.datanovia.com/en/lessons/repeated-measures-anova-in-r/
 
-Once data has been collected, it can be parsed using a python script and then analysed in R. Below is an excerpt of sample code in R that can be used ot conduct a one way ANOVA test on results loaded in from a csv file. This has been produced using the cited guides as reference\cite{Rtutone,Rtuttwo}.
+Once data has been collected, it can be parsed using a python script and analysed in R. The data collected in this way will consist of ratings, from 1 to 10, of the team's confidence in the accuracy of their scope, how well they understand the current state of the project, and how often the scope for the project is refined. The supervisor's confidence both in the team being able to present a working build at their next meeting and in being able to finish everything within their scope, rated from 1 to 10, will also be analysed with this method.\\
+There will also be the option for participants to expand on these ratings and give more verbose feedback, which could later be analysed using sentiment analysis\cite{altrabsheh2014sentiment}. \\
+Below is an excerpt of sample code in R that can be used to conduct a one way ANOVA test on results loaded in from a csv file. This has been produced using the cited guides as reference\cite{Rtutone,Rtuttwo}.
 
 \begin{lstlisting}[language=R, caption = Sample R code for performing a one way ANOVA on data imported from a csv file, captionpos = b]
     # Read's in data from a .csv file
@@ -190,6 +196,7 @@ Given these two factors, the project has been deemed medium risk and has such ha
 Data analysis code, supporting screenshots, list of unit tests \& testing plan
 
 \section{Artifact}
+\textbf{This is not being marked so from here it's just notes for me}
 briefly describe artifact
 make a brief note on quality assurance
 link to git repo
