@@ -81,28 +81,32 @@ def CombineData(dataA, dataB):
     return dataA + dataB
 
 
-validColumns = [3, 10, 16]
-columnHeaders = [['id', 'buildConfidence', 'scopeConfidence']]
+def CreateParsedSupervisorData():
+    validColumns = [3, 10, 16]
+    columnHeaders = [['id', 'buildConfidence', 'scopeConfidence']]
 
-experimentalSupervisorData = ParseData(
-    'Dissertation Survey - Supervisor Version E_(1-2).csv', validColumns, columnHeaders)
+    experimentalSupervisorData = ParseData(
+        'Dissertation Survey - Supervisor Version E_(1-2).csv', validColumns, columnHeaders)
 
-experimentalSupervisorData = MarkDataAsExperimental(
-    True, experimentalSupervisorData, 'isExperimental')
+    experimentalSupervisorData = MarkDataAsExperimental(
+        True, experimentalSupervisorData, 'isExperimental')
 
-validColumns = [3, 10, 16]
-columnHeaders = False
+    validColumns = [3, 10, 16]
+    columnHeaders = False
 
-controlSupervisorData = ParseData(
-    'Dissertation Survey - Supervisor Version E_(1-2).csv', validColumns, columnHeaders)
+    controlSupervisorData = ParseData(
+        'Dissertation Survey - Supervisor Version E_(1-2).csv', validColumns, columnHeaders)
 
-controlSupervisorData = MarkDataAsExperimental(
-    False, controlSupervisorData, False)
+    controlSupervisorData = MarkDataAsExperimental(
+        False, controlSupervisorData, False)
 
-combined = CombineData(experimentalSupervisorData, controlSupervisorData)
-combined = HashEmails(combined, 1)
+    combined = CombineData(experimentalSupervisorData, controlSupervisorData)
+    combined = HashEmails(combined, 1)
 
-WriteDataToOutputFile('parsed_results.csv', combined)
+    WriteDataToOutputFile('parsed_results.csv', combined)
+
+
+CreateParsedSupervisorData()
 
 # TODO:
 # - script to parse student data as this only does supervisor sheet
