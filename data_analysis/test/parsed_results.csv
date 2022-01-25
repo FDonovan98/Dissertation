@@ -1,3 +1,5 @@
-email,buildConfidence,scopeConfidence
-HD241610@falmouth.ac.uk,1,1
-HD241610@falmouth.ac.uk,3,3
+isExperimental,email,buildConfidence,scopeConfidence
+True,HD241610@falmouth.ac.uk,1,1
+True,HD241610@falmouth.ac.uk,3,3
+False,HD241610@falmouth.ac.uk,1,1
+False,HD241610@falmouth.ac.uk,3,3
