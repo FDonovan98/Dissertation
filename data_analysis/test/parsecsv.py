@@ -25,6 +25,12 @@ def ParseData(filePath, validColumns, columnHeaders):
     return parsedText
 
 
+def WriteDataToOutputFile(filepath, data):
+    with open(filepath, 'w') as outputFile:
+        writer = csv.writer(outputFile)
+        writer.writerows(data)
+
+
 def HashEmails(data):
     # hash email to obfuscate it but keep entries by the same person related
     y = 0
@@ -49,34 +55,17 @@ def CombineData(dataA, dataB):
     # return combinedData
 
 
-def WriteDataToOutputFile(filepath, data):
-    with open(filepath, 'w') as outputFile:
-        writer = csv.writer(outputFile)
-        writer.writerows(data)
-
-
 validColumns = [3, 10, 16]
 columnHeaders = [['email', 'buildConfidence', 'scopeConfidence']]
 
-experimentalSupervisorData = ParseData(
-    'Dissertation Survey - Supervisor Version E_(1-2).csv', validColumns, columnHeaders)
-# experimentalSupervisorData = MarkDataAsExperimental(
-#     True, experimentalSupervisorData)
-
 # experimentalSupervisorData = ParseData(
 #     'Dissertation Survey - Supervisor Version E_(1-2).csv', validColumns, columnHeaders)
-# experimentalSupervisorData = MarkDataAsExperimental(
-#     True, experimentalSupervisorData)
+
+# experimentalSupervisorData = HashEmails(experimentalSupervisorData)
 
 controlSupervisorData = ParseData(
     'Dissertation Survey - Supervisor Version E_(1-2).csv', validColumns, columnHeaders)
 
-experimentalSupervisorData = HashEmails(experimentalSupervisorData)
-
-controlSupervisorData = MarkDataAsExperimental(
-    False, controlSupervisorData)
-
-# supervisorData = CombineData(experimentalSupervisorData, controlSupervisorData)
 WriteDataToOutputFile('parsed_results.csv', controlSupervisorData)
 
 # TODO:
