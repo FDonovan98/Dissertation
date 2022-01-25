@@ -82,7 +82,7 @@ def CombineData(dataA, dataB):
 
 
 validColumns = [3, 10, 16]
-columnHeaders = [['email', 'buildConfidence', 'scopeConfidence']]
+columnHeaders = [['id', 'buildConfidence', 'scopeConfidence']]
 
 experimentalSupervisorData = ParseData(
     'Dissertation Survey - Supervisor Version E_(1-2).csv', validColumns, columnHeaders)
