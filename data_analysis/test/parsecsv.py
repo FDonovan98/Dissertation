@@ -71,7 +71,7 @@ experimentalSupervisorData = ParseData(
 controlSupervisorData = ParseData(
     'Dissertation Survey - Supervisor Version E_(1-2).csv', validColumns, columnHeaders)
 
-controlSupervisorData = HashEmails(controlSupervisorData)
+experimentalSupervisorData = HashEmails(experimentalSupervisorData)
 
 controlSupervisorData = MarkDataAsExperimental(
     False, controlSupervisorData)
