@@ -54,3 +54,11 @@ summary(mockdata)
 oneway <- aov(confidence ~ Experimental, data = mockdata)
 
 summary(oneway)
+
+testData <- read.csv("data_analysis/test/parsed_results.csv", header = TRUE, colClasses = c("factor", "factor", "numeric", "numeric"))
+
+summary(testData)
+
+oneway <- aov(buildConfidence ~ isExperimental + id, data = testData)
+
+summary(oneway)
