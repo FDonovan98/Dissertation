@@ -53,12 +53,13 @@ def WriteDataToOutputFile(filepath, data):
     return 0
 
 
-def HashEmails(data):
+def HashEmails(data, emailIndex):
     # hash email to obfuscate it but keep entries by the same person related
     y = 0
     for row in data:
         if (y != 0):
-            row[0] = hashlib.sha1(row[0].encode('utf-8')).hexdigest()
+            row[emailIndex] = hashlib.sha1(
+                row[emailIndex].encode('utf-8')).hexdigest()
         y += 1
 
     return data
@@ -99,6 +100,7 @@ controlSupervisorData = MarkDataAsExperimental(
     False, controlSupervisorData, False)
 
 combined = CombineData(experimentalSupervisorData, controlSupervisorData)
+combined = HashEmails(combined, 1)
 
 WriteDataToOutputFile('parsed_results.csv', combined)
 
