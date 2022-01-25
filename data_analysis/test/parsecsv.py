@@ -22,14 +22,18 @@ def ParseData(filePath, validColumns, columnHeaders):
                 parsedText.append(temp)
             y += 1
 
+    return parsedText
+
+
+def HashEmails(data):
     # hash email to obfuscate it but keep entries by the same person related
     y = 0
-    for row in parsedText:
+    for row in data:
         if (y != 0):
             row[0] = hashlib.sha1(row[0].encode('utf-8')).hexdigest()
         y += 1
 
-        return parsedText
+    return data
 
 
 def MarkDataAsExperimental(isExperimental, data):
@@ -38,11 +42,10 @@ def MarkDataAsExperimental(isExperimental, data):
         data[i].insert(0, isExperimental)
 
     return data
-    # return markedData
 
 
 def CombineData(dataA, dataB):
-    print('Error: Function is empty')
+    return dataA + dataB
     # return combinedData
 
 
@@ -57,16 +60,24 @@ columnHeaders = [['email', 'buildConfidence', 'scopeConfidence']]
 
 experimentalSupervisorData = ParseData(
     'Dissertation Survey - Supervisor Version E_(1-2).csv', validColumns, columnHeaders)
+# experimentalSupervisorData = MarkDataAsExperimental(
+#     True, experimentalSupervisorData)
 
-experimentalSupervisorData = MarkDataAsExperimental(
-    True, experimentalSupervisorData)
+# experimentalSupervisorData = ParseData(
+#     'Dissertation Survey - Supervisor Version E_(1-2).csv', validColumns, columnHeaders)
+# experimentalSupervisorData = MarkDataAsExperimental(
+#     True, experimentalSupervisorData)
 
-# controlSupervisorData = ParseData('control_supervisor_file.csv')
-# controlSupervisorData = MarkDataAsExperimental(
-#     False, experimentalSupervisorData)
+controlSupervisorData = ParseData(
+    'Dissertation Survey - Supervisor Version E_(1-2).csv', validColumns, columnHeaders)
+
+controlSupervisorData = HashEmails(controlSupervisorData)
+
+controlSupervisorData = MarkDataAsExperimental(
+    False, controlSupervisorData)
 
 # supervisorData = CombineData(experimentalSupervisorData, controlSupervisorData)
-WriteDataToOutputFile('parsed_results.csv', experimentalSupervisorData)
+WriteDataToOutputFile('parsed_results.csv', controlSupervisorData)
 
 # TODO:
 # - script to parse student data as this only does supervisor sheet
