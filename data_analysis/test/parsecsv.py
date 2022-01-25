@@ -29,6 +29,12 @@ for row in parsedText:
         row[0] = hashlib.sha1(row[0].encode('utf-8')).hexdigest()
     y += 1
 
+
+# Output results to .csv file
+with open('parsed_results.csv', 'w') as outputFile:
+    writer = csv.writer(outputFile)
+
+
 # TODO:
 # - script to parse student data as this only does supervisor sheet
 # - student sheet will need to be related to a supervisor before encoding
