@@ -1,8 +1,12 @@
 import csv
 import hashlib
 
+# Reads data from .csv file, including only wanted columns
+
 
 def ParseData(filePath, validColumns, columnHeaders):
+    # First set of data will need to have column headers
+    # Following sets will not
     if(columnHeaders == False):
         parsedText = []
     else:
@@ -16,17 +20,22 @@ def ParseData(filePath, validColumns, columnHeaders):
             x = 0
             temp = []
             for word in row:
+                # y != 0 to ignore .csv headers in favour of custom headers
                 if (y != 0):
+                    # Ignore any columns we don't want results from
                     if(x in validColumns):
                         temp.append(word)
 
                 x += 1
 
+            # y != 0 to ignore .csv headers in favour of custom headers
             if (y != 0):
                 parsedText.append(temp)
             y += 1
 
     return parsedText
+
+# Test function to strip all data from a .csv, regardless of wanted columns
 
 
 def SimpleParse(filePath):
@@ -52,8 +61,8 @@ def WriteDataToOutputFile(filepath, data):
     return 0
 
 
+# Hash email to obfuscate it but keep entries by the same person related
 def HashEmails(data, emailIndex):
-    # hash email to obfuscate it but keep entries by the same person related
     y = 0
     for row in data:
         if (y != 0):
@@ -62,6 +71,8 @@ def HashEmails(data, emailIndex):
         y += 1
 
     return data
+
+# Marks whether data has come from an experimental or control group
 
 
 def MarkDataAsExperimental(isExperimental, data, header):
@@ -79,13 +90,17 @@ def MarkDataAsExperimental(isExperimental, data, header):
 def CombineData(dataA, dataB):
     return dataA + dataB
 
+# Reads data from experimental .csv file & control .csv file
+# Then marks them as experimental or control
+# Then outputs the data to another file
 
-def CreateParsedSupervisorData():
+
+def CreateParsedSupervisorData(controlDataPath, experimentalDataPath, outputDataPath):
     validColumns = [3, 10, 16]
     columnHeaders = [['id', 'buildConfidence', 'scopeConfidence']]
 
     experimentalSupervisorData = ParseData(
-        'Dissertation Survey - Supervisor Version E_(1-2).csv', validColumns, columnHeaders)
+        experimentalDataPath, validColumns, columnHeaders)
 
     experimentalSupervisorData = MarkDataAsExperimental(
         True, experimentalSupervisorData, 'isExperimental')
@@ -94,7 +109,7 @@ def CreateParsedSupervisorData():
     columnHeaders = False
 
     controlSupervisorData = ParseData(
-        'Dissertation Survey - Supervisor Version E_(1-2).csv', validColumns, columnHeaders)
+        controlDataPath, validColumns, columnHeaders)
 
     controlSupervisorData = MarkDataAsExperimental(
         False, controlSupervisorData, False)
@@ -102,10 +117,16 @@ def CreateParsedSupervisorData():
     combined = CombineData(experimentalSupervisorData, controlSupervisorData)
     combined = HashEmails(combined, 1)
 
-    WriteDataToOutputFile('parsed_results.csv', combined)
+    WriteDataToOutputFile(outputDataPath, combined)
 
 
-CreateParsedSupervisorData()
+# Set file path's
+controlDataPath = 'Dissertation Survey - Supervisor Version E_(1-2).csv'
+experimentalDataPath = 'Dissertation Survey - Supervisor Version E_(1-2).csv'
+outputDataPath = 'parsed_results.csv'
+
+CreateParsedSupervisorData(
+    controlDataPath, experimentalDataPath, outputDataPath)
 
 # TODO:
 # - script to parse student data as this only does supervisor sheet
