@@ -121,9 +121,9 @@ def CreateParsedSupervisorData(controlDataPath, experimentalDataPath, outputData
 
 
 # Set file path's
-controlDataPath = 'Dissertation Survey - Supervisor Version E_(1-2).csv'
-experimentalDataPath = 'Dissertation Survey - Supervisor Version E_(1-2).csv'
-outputDataPath = 'parsed_results.csv'
+controlDataPath = 'Dissertation Survey - Supervisor Version N.csv'
+experimentalDataPath = 'Dissertation Survey - Supervisor Version P_(1-2)(1).csv'
+outputDataPath = 'parsed_supervisor_results.csv'
 
 CreateParsedSupervisorData(
     controlDataPath, experimentalDataPath, outputDataPath)
