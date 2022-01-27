@@ -1,9 +1,9 @@
+from ast import Not
 import csv
 import hashlib
+from random import random
 
 # Reads data from .csv file, including only wanted columns
-
-
 def ParseData(filePath, validColumns, columnHeaders):
     # First set of data will need to have column headers
     # Following sets will not
@@ -36,19 +36,21 @@ def ParseData(filePath, validColumns, columnHeaders):
     return parsedText
 
 # Test function to strip all data from a .csv, regardless of wanted columns
-
-
 def SimpleParse(filePath):
-    parsedText = [[]]
+    y = 0
+
     with open(filePath, newline='') as csvfile:
         file = csv.reader(csvfile, dialect='excel')
         for row in file:
-            x = 0
             temp = []
             for word in row:
-                temp.append(word)
-
-            parsedText.append(temp)
+                if (y != 0):
+                    temp.append(word)
+            if(y == 1):
+                parsedText = temp
+            if(y > 1):
+                parsedText.append(temp)
+            y += 1
 
     return parsedText
 
@@ -62,19 +64,17 @@ def WriteDataToOutputFile(filepath, data):
 
 
 # Hash email to obfuscate it but keep entries by the same person related
-def HashEmails(data, emailIndex):
+def HashColumn(data, columnIndex):
     y = 0
     for row in data:
         if (y != 0):
-            row[emailIndex] = hashlib.sha1(
-                row[emailIndex].encode('utf-8')).hexdigest()
+            row[columnIndex] = hashlib.sha1(
+                row[columnIndex].encode('utf-8')).hexdigest()
         y += 1
 
     return data
 
 # Marks whether data has come from an experimental or control group
-
-
 def MarkDataAsExperimental(isExperimental, data, header):
     if (header == False):
         start = 0
@@ -90,11 +90,30 @@ def MarkDataAsExperimental(isExperimental, data, header):
 def CombineData(dataA, dataB):
     return dataA + dataB
 
+def SetTeams(data, header):
+    data[0].insert(1, header)
+    for i in range(1, len(data)):
+        hasSetValue = False
+        for j in range(0, len(teamLookupTable)):
+            for k in range(1, len(teamLookupTable[j])):
+                # print(data[i][1])
+                # print('lookup: ' + teamLookupTable[j][k])
+                if (data[i][1] == teamLookupTable[j][k]):
+                    hasSetValue = True
+                    data[i].insert(1, teamLookupTable[j][0])
+                    j = len(teamLookupTable)
+                    k = len(teamLookupTable)
+            if (j == len(teamLookupTable)-1 and not hasSetValue):
+                print("ERROR: " + data[i][1] + " not present in teamLookupTable. Assigning random value for " + header)
+                data[i].insert(1, str(random()))
+
+    # print(teamLookupTable)
+    # print(data[1][1])
+    return data
+
 # Reads data from experimental .csv file & control .csv file
 # Then marks them as experimental or control
 # Then outputs the data to another file
-
-
 def CreateParsedSupervisorData(controlDataPath, experimentalDataPath, outputDataPath):
     validColumns = [3, 10, 16]
     columnHeaders = [['id', 'buildConfidence', 'scopeConfidence']]
@@ -113,12 +132,26 @@ def CreateParsedSupervisorData(controlDataPath, experimentalDataPath, outputData
 
     controlSupervisorData = MarkDataAsExperimental(
         False, controlSupervisorData, False)
+    print(controlSupervisorData)
 
     combined = CombineData(experimentalSupervisorData, controlSupervisorData)
-    combined = HashEmails(combined, 1)
+    combined = SetTeams(combined, 'team')
+    combined = HashColumn(combined, 1)
+    combined = HashColumn(combined, 2)
+
+    # TODO: Add column with team id for each participant
 
     WriteDataToOutputFile(outputDataPath, combined)
 
+# TODO: Parse text file of experiment participants to generate lookup table
+def GenerateLookupTable(filePath):
+    parsedData = SimpleParse(filePath)
+
+    return parsedData
+
+
+
+teamLookupTable = GenerateLookupTable('Participants.csv')
 
 # Set file path's
 controlDataPath = 'Dissertation Survey - Supervisor Version N.csv'
