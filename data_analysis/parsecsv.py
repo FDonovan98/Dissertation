@@ -107,8 +107,6 @@ def SetTeams(data, header):
                 print("ERROR: " + data[i][1] + " not present in teamLookupTable. Assigning random value for " + header)
                 data[i].insert(1, str(random()))
 
-    # print(teamLookupTable)
-    # print(data[1][1])
     return data
 
 # Reads data from experimental .csv file & control .csv file
@@ -143,7 +141,6 @@ def CreateParsedSupervisorData(controlDataPath, experimentalDataPath, outputData
 
     WriteDataToOutputFile(outputDataPath, combined)
 
-# TODO: Parse text file of experiment participants to generate lookup table
 def GenerateLookupTable(filePath):
     parsedData = SimpleParse(filePath)
 
