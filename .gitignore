@@ -1,1 +1,4 @@
 *.~lock*
+*.csv
+*.xlsx
+*.ods
