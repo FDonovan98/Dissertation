@@ -130,14 +130,11 @@ def CreateParsedSupervisorData(controlDataPath, experimentalDataPath, outputData
 
     controlSupervisorData = MarkDataAsExperimental(
         False, controlSupervisorData, False)
-    print(controlSupervisorData)
 
     combined = CombineData(experimentalSupervisorData, controlSupervisorData)
     combined = SetTeams(combined, 'team')
     combined = HashColumn(combined, 1)
     combined = HashColumn(combined, 2)
-
-    # TODO: Add column with team id for each participant
 
     WriteDataToOutputFile(outputDataPath, combined)
 
@@ -147,6 +144,50 @@ def GenerateLookupTable(filePath):
     return parsedData
 
 
+def ConvertVerboseToNumeric(data, columnIndex, verboseArray):
+    y = 0
+    entryConverted = True
+    for row in data:
+        if (y != 0):
+            entryConverted = False
+            for i in range(0, len(verboseArray)):
+                if (row[columnIndex] == verboseArray[i]):
+                    row[columnIndex] = i
+                    entryConverted = True
+                    i = len(verboseArray)
+        if (not entryConverted):
+            print("Error: Verbose entry " + row[columnIndex] + " had no equivalent in verboseArray")
+        y += 1
+
+    return data
+
+def CreateParsedStudentData(controlDataPath, experimentalDataPath, outputDataPath):
+    validColumns = [3, 10, 16, 22, 25, 28]
+    columnHeaders = [['id', 'scopeConfidence', 'stateUnderstanding', 'contributionUnderstanding', 'scopeFrequency', 'playtestFrequency']]
+    
+    experimentalData = ParseData(experimentalDataPath, validColumns, columnHeaders)
+
+    experimentalData = MarkDataAsExperimental(
+    True, experimentalData, 'isExperimental')
+
+    validColumns = [3, 10, 16, 22, 25, 28]
+    columnHeaders = False
+
+    controlData = ParseData(
+        controlDataPath, validColumns, columnHeaders)
+
+    controlData = MarkDataAsExperimental(
+        False, controlData, False)
+
+    combined = CombineData(experimentalData, controlData)
+    combined = ConvertVerboseToNumeric(combined, 5, ['Once a semester\n', 'Every other sprint\n', 'Once per sprint\n', 'Multiple times per sprint\n'])
+    combined = ConvertVerboseToNumeric(
+        combined, 6, ['Only at events (Demo day etc.)\n', 'Every other sprint\n', 'Once per sprint\n', 'Multiple times per sprint\n'])
+    combined = SetTeams(combined, 'team')
+    combined = HashColumn(combined, 1)
+    combined = HashColumn(combined, 2)
+
+    WriteDataToOutputFile(outputDataPath, combined)
 
 teamLookupTable = GenerateLookupTable('Participants.csv')
 
@@ -154,8 +195,14 @@ teamLookupTable = GenerateLookupTable('Participants.csv')
 controlDataPath = 'Dissertation Survey - Supervisor Version N.csv'
 experimentalDataPath = 'Dissertation Survey - Supervisor Version P_(1-2)(1).csv'
 outputDataPath = 'parsed_supervisor_results.csv'
-
 CreateParsedSupervisorData(
+    controlDataPath, experimentalDataPath, outputDataPath)
+
+# Set file path's
+controlDataPath = 'Dissertation Survey - Student Version N_(1-2).csv'
+experimentalDataPath = 'Dissertation Survey - Student Version P(1-2)-1.csv'
+outputDataPath = 'parsed_student_results.csv'
+CreateParsedStudentData(
     controlDataPath, experimentalDataPath, outputDataPath)
 
 # TODO:
