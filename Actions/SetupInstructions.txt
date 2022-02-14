@@ -1,0 +1,4 @@
+Grant repo github actions permissions
+add .github/ folder & contents to root of project
+Set up repo wide secret for create pull request action
+Add some variation to build submission time to help w/ server load
