@@ -1,0 +1,34 @@
+name: Open main to stable pull request
+on:
+  schedule:
+  # Runs at 1am Tuesday through Saturday
+  - cron: "0 1 * * 2-6"
+
+  workflow_dispatch:
+
+jobs:
+  merge:
+    name: Create pull request
+    runs-on: azure-docker
+    steps:
+      # Checkout (without LFS)
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      # Git LFS
+      - name: Create LFS file list
+        run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
+      - name: Git LFS Pull
+        run: |
+          git lfs pull
+          git add .
+          git reset --hard
+
+      - name: Create pull request
+        id: create-pr
+        uses: HDonovan96/pull-request@v2.6.2
+        with:
+          source_branch: "main"
+          destination_branch: "stable/daily"
+          github_token: ${{ secrets.REPO_SCOPE_TOKEN }}
+
+      
