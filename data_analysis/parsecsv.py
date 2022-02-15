@@ -38,7 +38,7 @@ def ParseData(filePath, validColumns, columnHeaders):
 # Test function to strip all data from a .csv, regardless of wanted columns
 def SimpleParse(filePath):
     y = 0
-
+    parsedText = []
     with open(filePath, newline='') as csvfile:
         file = csv.reader(csvfile, dialect='excel')
         for row in file:
@@ -46,9 +46,7 @@ def SimpleParse(filePath):
             for word in row:
                 if (y != 0):
                     temp.append(word)
-            if(y == 1):
-                parsedText = temp
-            if(y > 1):
+            if(y >= 1):
                 parsedText.append(temp)
             y += 1
 
@@ -96,14 +94,15 @@ def SetTeams(data, header):
         hasSetValue = False
         for j in range(0, len(teamLookupTable)):
             for k in range(1, len(teamLookupTable[j])):
-                # print(data[i][1])
-                # print('lookup: ' + teamLookupTable[j][k])
                 if (data[i][1] == teamLookupTable[j][k]):
                     hasSetValue = True
                     data[i].insert(1, teamLookupTable[j][0])
-                    j = len(teamLookupTable)
-                    k = len(teamLookupTable)
-            if (j == len(teamLookupTable)-1 and not hasSetValue):
+
+                if(hasSetValue): break
+            
+            if (hasSetValue): break
+
+            if (j == len(teamLookupTable)-1):
                 print("ERROR: " + data[i][1] + " not present in teamLookupTable. Assigning random value for " + header)
                 data[i].insert(1, str(random()))
 
@@ -140,7 +139,6 @@ def CreateParsedSupervisorData(controlDataPath, experimentalDataPath, outputData
 
 def GenerateLookupTable(filePath):
     parsedData = SimpleParse(filePath)
-
     return parsedData
 
 
@@ -191,12 +189,12 @@ def CreateParsedStudentData(controlDataPath, experimentalDataPath, outputDataPat
 
 teamLookupTable = GenerateLookupTable('Participants.csv')
 
-# Set file path's
-controlDataPath = 'Dissertation Survey - Supervisor Version N.csv'
-experimentalDataPath = 'Dissertation Survey - Supervisor Version P_(1-2)(1).csv'
-outputDataPath = 'parsed_supervisor_results.csv'
-CreateParsedSupervisorData(
-    controlDataPath, experimentalDataPath, outputDataPath)
+# # Set file path's
+# controlDataPath = 'Dissertation Survey - Supervisor Version N.csv'
+# experimentalDataPath = 'Dissertation Survey - Supervisor Version P_(1-2)(1).csv'
+# outputDataPath = 'parsed_supervisor_results.csv'
+# CreateParsedSupervisorData(
+#     controlDataPath, experimentalDataPath, outputDataPath)
 
 # Set file path's
 controlDataPath = 'Dissertation Survey - Student Version N_(1-2).csv'
