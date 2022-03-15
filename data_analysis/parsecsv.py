@@ -197,8 +197,8 @@ teamLookupTable = GenerateLookupTable('Participants.csv')
 #     controlDataPath, experimentalDataPath, outputDataPath)
 
 # Set file path's
-controlDataPath = 'Dissertation Survey - Student Version N_(1-2).csv'
-experimentalDataPath = 'Dissertation Survey - Student Version P(1-2)-1.csv'
+controlDataPath = 'Dissertation Survey - Student Version N.csv'
+experimentalDataPath = 'Dissertation Survey - Student Version P.csv'
 outputDataPath = 'parsed_student_results.csv'
 CreateParsedStudentData(
     controlDataPath, experimentalDataPath, outputDataPath)
