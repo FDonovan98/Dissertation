@@ -15,11 +15,17 @@ for (i in 4:8) {
 
     print(names(testData)[i])
     print(summary(oneway))
+    print(effectsize::omega_squared(oneway))
     print(aictab(model.set, modnames = model.names))
 }
 
 formula <- as.formula(paste0(paste(names(testData)[7]), " ~ isExperimental"))
 oneway <- aov(formula, data = testData)
+print(names(testData)[7])
+print(summary(oneway))
+print(effectsize::cohens_f(oneway))
+effectsize::eta_squared(oneway)
+effectsize::omega_squared(oneway)
 par(mfrow = c(2, 2))
 plot(oneway)
 par(mfrow = c(1, 1))

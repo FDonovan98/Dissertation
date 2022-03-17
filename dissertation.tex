@@ -16,6 +16,7 @@
 \usepackage{soul}
 \usepackage{hyperref}
 \usepackage{listings}
+\usepackage{tabularx}
 \lstset{
   basicstyle=\ttfamily,
   columns=fullflexible,
@@ -93,7 +94,7 @@ CSQUOTE PACKAGE MAY GIVE BETTER FORMATTING FOR THE BELOW. REMOVED THROUGH IN "su
 This is purposefully broad, with the aim of encouraging and supporting further research into the topic. Given this, the following hypothesises will be investigated;
 
 \begin{enumerate}
-    \item \label{h_supconfidence} The use of a CD pipeline will increase a supervisors confidence in their team's ability to deliver a new, working build each week, COMPARED TO TEAM'S NOT USING A CD PIPELINE. (Q.S1)
+    \item \label{h_supconfidence} The use of a CD pipeline will increase a supervisors confidence in their team's ability to deliver a new, working build each week, compared to team's not using a CD pipeline. (Q.S1)
     \item \label{h_supteamconfidence} The team's confidence and the supervisors confidence in being able to achieve everything within the scope of the project will be much more closely related with the use of a CD pipeline.(Q.S2,St1 plotted against time)
     \item \label{h_projectstate} A CD pipeline will help developers understand the current state of the project (Q.St2)
     \item \label{h_workreason} A CD pipeline will help developers to always know why the work they are doing is being done (Q.St3)
@@ -227,13 +228,32 @@ Due to the nature of this research, there are minimal ethical considerations tha
 The artifact itself is of minimal risk, as it is collecting no personal information and does not have the potential to be weaponised. \\
 Given these two factors, the project has been deemed medium risk and has such has been signed off by the research project Supervisor and Head of Subject, Dr Michael Scott, in accordance with Falmouth University's ethics policy\cite{falethicspolicy}.
 
+\lstset{language = R}
 \section{Data Analysis}
-    \subsection{Hypothesis}
-    \subsection{Hypothesis}
-    \subsection{Hypothesis}
-    \subsection{Hypothesis}
-    \subsection{Hypothesis}
-    \subsection{Hypothesis}
+    Data for each hypothesis was analysed using repeated measures ANOVA \cite{carvadiaANOVA} using the R function \lstinline{aov} \cite{RaovDocs}. Three different ANOVA tests were then carried out, a one-way test against if the group was using the pipeline, a two-way test with the specific Team, and another two way test with the individual having an interaction effect upon their answer. An Akaike Information Criterion (AIC) \cite{AIC} test was then used to evaluate which of these models best fits our data, so we know which model to base our analysis off. \\
+    Once determining the most accurate model, which for all hypothesise was the one-way ANOVA, the R function \lstinline{effectsize::omega_squared}\cite{RcohensfDocs} is used to calculate the effect size. Cohen's f was originally going to be used to compare effect sizes, however after consultation with more experienced academics $\eta^2$ was recommended instead. $\omega^2$ was then chosen as in the R documentation and elsewhere \cite{RcohensfDocs, statHowToOmegaSquared,ALBERS2018187}, it is recommended to use this over $\eta^2$ as it is less biased, especially for small sample sizes. As our sample size is only 25 results, this seems appropriate. The boundaries that will be used for contextualising the reported effect size are as follows\cite{field2013discovering}, where $x$ is the reported effect size:
+
+    \begin{tabularx}{\linewidth}{r r c l}
+        Very Small - & $0 > $ & $ x $ & $<=0.01$ \\
+        Small - & $0.01 > $ & $ x $ & $<=0.06$ \\
+        Medium - & $0.06 > $ & $ x $ & $<=0.14$ \\
+        Large - & $0.14 > $ & $ x $ &  
+    \end{tabularx}
+
+    The $\omega^2$ value for many of these hypothesis was negative, and while this would normally be rounded to 0.00 this has been left as-is\cite{okada2017negative}.
+
+    \subsection{The use of a CD pipeline will increase a supervisors confidence in their team's ability to deliver a new, working build each week, compared to team's not using a CD pipeline.}
+
+    \subsection{The team's confidence and the supervisors confidence in being able to achieve everything within the scope of the project will be much more closely related with the use of a CD pipeline.}
+
+    \subsection{A CD pipeline will help developers understand the current state of the project}
+
+    \subsection{A CD pipeline will help developers to always know why the work they are doing is being done}
+
+    \subsection{A team using a CD pipeline will refine their scope more often}
+        Statistically significant chance, around 97\%, that the difference observed is not from random chance. The size of this observed difference is also large, with an effect size of 0.16.
+
+    \subsection{A team using a CD pipeline will do more playtesting}
 
 \section{Discussion of results}
 
