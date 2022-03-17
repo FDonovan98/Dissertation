@@ -1,4 +1,4 @@
-testData <- read.csv("parsed_student_results.csv", header = TRUE, colClasses = c("factor", "factor", "factor", "numeric", "numeric", "numeric", "numeric", "numeric"))
+testData <- read.csv("data_analysis/parsed_student_results.csv", header = TRUE, colClasses = c("factor", "factor", "factor", "numeric", "numeric", "numeric", "numeric", "numeric"))
 
 for (i in 4:8) {
     formula <- as.formula(paste0(paste(names(testData)[i]), " ~ isExperimental"))

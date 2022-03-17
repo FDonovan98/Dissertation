@@ -101,6 +101,37 @@ This is purposefully broad, with the aim of encouraging and supporting further r
     \item \label{h_playtesting} A team using a CD pipeline will do more playtesting
 \end{enumerate}
 
+\section{Artifact}
+INCLUDE CODE SNIPPETS. LACK OF CLARITY ON SPECIFIC DESIGN OF MY INTERVENTION AND SUPPORT PROVIDED TO TEAM'S AND WHAT SPECIFIC INTERVENTION IN. DETAIL SHOULD BE SUFFICIENT FOR SOMEONE TO BE ABLE TO GO AWAY AND REPLICATE (STANDARD SCIENTIFIC RIGOUR)
+The artifact to be produced will be the Continuous Delivery pipeline that will be supplied to the experimental team's. This will be designed to take advantage of the version control software used within Falmouth University Games Academy, Github Enterprise\cite{gitenterprise}. This pipeline will be built using Github Actions\cite{gitactions}, an automation system built into Github, and GameCI\cite{gameci}, a CI/ CD api designed for automated build and testing of Unity projects. The pipeline shall consist of 5 main stages. These are detailed below, and the pipeline flow is shown in the Appendix, figure \ref{CDflow}. This flow can be seen in action on a live project at the following link: \url{https://github.falmouth.ac.uk/Glass-Nomad-Games/Silverback}, and the source code is listed in the Appendix, listing \ref{SCPullRequest} and listing \ref{SCBuildTest}.\\
+
+\subsubsection*{Generate daily pull request}
+At midnight each night the main branch is compared against the stable branch. If main is ahead of stable then a pull request is created.\\
+
+\subsubsection*{Unit tests}
+COULD ALSO TALK ABOUT TESTS FOR STATISTICAL ANALYSIS CODE
+Any tests included with the project are then run. These could include frame rate benchmarking, weapon testing, or spawn testing.\\
+
+\subsubsection*{Generate and upload build}
+Once all unit tests pass, a build is then created and uploaded as a Github artifact\cite{gitartifacts}. This could also be expanded to include automatic uploading to Steam, as done on the live project above, using the Steamworks SDK\cite{steamupload} or to Itch using Butler\cite{itchupload}, but is potentially out of scope for the current project.\\
+
+\subsubsection*{Merge pull request}
+If the build is created and uploaded successfully, the opened pull request is then merged and closed.\\
+
+
+% make a brief note on quality assurance
+% show off any screenshots or code excerpts
+
+% two repo link - one with artifact to easily show off then give link to show it embedded in main project
+
+\subsection{Development and Quality Assurance}
+The development of this artifact followed an Agile \cite{agilemanifesto} and iterative approach
+% Quality control. Roadmap? Unit Testing? Integration testing?
+
+% \subsection{How will I create it}
+
+% \subsection{Why will this answer the questions}
+
 \section{Research Methodology}
 \subsection{Experimental Design}
 MAKE JUSTIFICATION MORE IN THE FOREFRONT. IE, WHY DO WE HAVE EXPERIMENTAL \& CONTROL GROUP "LOOK AT PAPER ON EXPERIMENTAL METHODS AND OUTCOME EVALUATION IN JOURNAL OF CONSULTING AND CLINICAL PSYCHOLOGY BY MAHONY", JUSTIFY WHY NOT USED A DIFFERENT EXPERIMENTAL DESIGN LIKE FACTORIAL OR SOLOMON TILE. WHY IS IT RUN OVER THE TIME PERIOD IT'S RUN OVER (TALK ABOUT BOUNDS FOR STATISTICAL POWER (2SETS VS 4 SETS VS 8 SETS) REDUCING REQUIRED PARTICIPANTS).
@@ -196,49 +227,36 @@ Due to the nature of this research, there are minimal ethical considerations tha
 The artifact itself is of minimal risk, as it is collecting no personal information and does not have the potential to be weaponised. \\
 Given these two factors, the project has been deemed medium risk and has such has been signed off by the research project Supervisor and Head of Subject, Dr Michael Scott, in accordance with Falmouth University's ethics policy\cite{falethicspolicy}.
 
+\section{Data Analysis}
+    \subsection{Hypothesis}
+    \subsection{Hypothesis}
+    \subsection{Hypothesis}
+    \subsection{Hypothesis}
+    \subsection{Hypothesis}
+    \subsection{Hypothesis}
 
-\section{Artifact}
-COULD BE INTODUCED EARLIER AS IT GIVES CONTEXT TO RESEARCH METHOD. INCLUDE CODE SNIPPETS. LACK OF CLARITY ON SPECIFIC DESIGN OF MY INTERVENTION AND SUPPORT PROVIDED TO TEAM'S AND WHAT SPECIFIC INTERVENTION IN. DETAIL SHOULD BE SUFFICIENT FOR SOMEONE TO BE ABLE TO GO AWAY AND REPLICATE (STANDARD SCIENTIFIC RIGOUR)
-The artifact to be produced will be the Continuous Delivery pipeline that will be supplied to the experimental team's. This will be designed to take advantage of the version control software used within Falmouth University Games Academy, Github Enterprise\cite{gitenterprise}. This pipeline will be built using Github Actions\cite{gitactions}, an automation system built into Github, and GameCI\cite{gameci}, a CI/ CD api designed for automated build and testing of Unity projects. The pipeline shall consist of 5 main stages. These are detailed below, and the pipeline flow is shown in the Appendix, figure \ref{CDflow}. This flow can be seen in action on a live project at the following link: \url{https://github.falmouth.ac.uk/Glass-Nomad-Games/Silverback}.\\
+\section{Discussion of results}
 
-\subsubsection*{Generate daily pull request}
-At midnight each night the main branch is compared against the stable branch. If main is ahead of stable then a pull request is created.\\
+\section{Issues and Limitations}
 
-\subsubsection*{Unit tests}
-COULD ALSO TALK ABOUT TESTS FOR STATISTICAL ANALYSIS CODE
-Any tests included with the project are then run. These could include frame rate benchmarking, weapon testing, or spawn testing.\\
+\section{Future Work}
 
-\subsubsection*{Generate and upload build}
-Once all unit tests pass, a build is then created and uploaded as a Github artifact\cite{gitartifacts}. This could also be expanded to include automatic uploading to Steam, as done on the live project above, using the Steamworks SDK\cite{steamupload} or to Itch using Butler\cite{itchupload}, but is potentially out of scope for the current project.\\
-
-\subsubsection*{Merge pull request}
-If the build is created and uploaded successfully, the opened pull request is then merged and closed.\\
-
-
-% make a brief note on quality assurance
-% show off any screenshots or code excerpts
-
-% More interested in what and how at this stage
-
-% two repo link - one with artifact to easily show off then give link to show it embedded in main project
-% \subsection{What will be made}
-% CD pipeline utilising Github Actions. Tool to set up secrets? Would be sick \url{https://docs.github.com/en/rest/reference/actions#secrets} \\
-% Continuous delivery or continuous deployment? Scope as deployment would need to include itch integration w/ butler, although it looks relatively simple to set up.
-% Auto-upload to steam \& itch! \url{https://itch.io/docs/butler/}
-
-% \subsection{How will I ensure Quality}
-% Quality control. Roadmap? Unit Testing? Integration testing?
-
-% \subsection{How will I create it}
-
-% \subsection{Why will this answer the questions}
+\section{Conclusion}
 
 \section{Appendix}
-\begin{figure}[h!]
+\begin{figure}
     \includegraphics[width=0.95\columnwidth]{Images/CD.png}
     \caption{A diagram showing the flow of the Continuous Delivery system}
     \label{CDflow}
 \end{figure}
+
+\lstinputlisting[label=SCPullRequest, caption =Github Actions code to open a pull request from 'main' branch to 'stable/daily' branch at midnight each weeknight, captionpos=b]{Actions/.github/workflows/createPull.yml}
+
+\lstinputlisting[label=SCBuildTest, caption=Github Actions code that runs on every opened Pull Request. Runs unit tests\, builds the project\, and then uploads it to steam, captionpos=b]{Actions/.github/workflows/BuildTestMain.yml}
+
+\lstinputlisting[language=python, label=SCParse, caption=Python code that parses the results .csv generated by Microsoft Forms and exports only the useful data to a new .csv. User details are also encrypted., captionpos=b]{data_analysis/parsecsv.py}
+
+\lstinputlisting[language =R, label=SCRAnalysis, caption =R code to perform ANOVA tests upon results after file is parsed with Python. Best fit analysis is then performed upon these tests., captionpos =b]{data_analysis/stat_analysis.r}
 
 CHECK OUT EDUCATION ROUNDTABLE AT GDC FOR SOFTWARE ENGINEERING, IF COULD LINK TO CONTEMPORARY ISSUES WITHIN EDUCATION WILL HELP WITH TIMELINESS
 \bibliographystyle{IEEEtran}
