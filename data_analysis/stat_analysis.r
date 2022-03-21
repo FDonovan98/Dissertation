@@ -1,5 +1,7 @@
 testData <- read.csv("data_analysis/parsed_student_results.csv", header = TRUE, colClasses = c("factor", "factor", "factor", "numeric", "numeric", "numeric", "numeric", "numeric"))
 
+library(AICcmodavg)
+
 for (i in 4:8) {
     formula <- as.formula(paste0(paste(names(testData)[i]), " ~ isExperimental"))
     oneway <- aov(formula, data = testData)
