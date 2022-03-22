@@ -230,8 +230,8 @@ Given these two factors, the project has been deemed medium risk and has such ha
 
 \lstset{language = R}
 \section{Data Analysis}
-    Data for each hypothesis was analysed using repeated measures ANOVA \cite{carvadiaANOVA} using the R function \lstinline{aov} \cite{RaovDocs}. Three different ANOVA tests were then carried out, a one-way test against if the group was using the pipeline, a two-way test with the specific Team, and another two way test with the individual having an interaction effect upon their answer. An Akaike Information Criterion (AIC) \cite{AIC} test was then used to evaluate which of these models best fits our data, so we know which model to base our analysis off. \\
-    Once determining the most accurate model, which for all hypothesise was the one-way ANOVA, the R function \lstinline{effectsize::omega_squared}\cite{RcohensfDocs} is used to calculate the effect size. Cohen's f was originally going to be used to compare effect sizes, however after consultation with more experienced academics $\eta^2$ was recommended instead. $\omega^2$ was then chosen as in the R documentation and elsewhere \cite{RcohensfDocs, statHowToOmegaSquared,ALBERS2018187}, it is recommended to use this over $\eta^2$ as it is less biased, especially for small sample sizes. As our sample size is only 25 results, this seems appropriate. The boundaries that will be used for contextualising the reported effect size are as follows\cite{field2013discovering}, where $x$ is the reported effect size:
+    Data for each hypothesis was analysed using repeated measures ANOVA \cite{carvadiaANOVA} using the R function \lstinline{aov} \cite{RaovDocs}. Three different ANOVA tests were then carried out, a one-way test against if the group was using the pipeline, a two-way test with the specific Team as a modifier, and another two way test with the team as a modifier and with the individual person having an interaction effect. An Akaike Information Criterion (AIC) \cite{AIC} test was then used to evaluate which of these models best fits our data. \\
+    The most appropriate model identified above, which for all hypothesise was the one-way ANOVA, was then used with the R function \textbf{\lstinline{effectsize::omega_squared}}\cite{RcohensfDocs} to calculate the effect size. Cohen's f was originally going to be used to compare effect sizes, however after consultation with more experienced academics, $\eta^2$ was chosen instead. After further research, this was replaced with $\omega^2$, as in the R documentation and elsewhere \cite{RcohensfDocs, statHowToOmegaSquared,ALBERS2018187} it is recommended to use this over $\eta^2$ as it is reportedly less biased, especially for small sample sizes\cite{ALBERS2018187}. As our sample size is only 25 results, this seems appropriate. The boundaries that will be used for contextualising the reported effect size are below, where $x$ is the reported effect size. This is based upon the recommended heuristics from Andy Field\cite{field2013discovering}.
 
     \begin{tabularx}{\linewidth}{r r c l}
         Very Small - & $0 > $ & $ x $ & $<=0.01$ \\
@@ -240,27 +240,28 @@ Given these two factors, the project has been deemed medium risk and has such ha
         Large - & $0.14 > $ & $ x $ &  
     \end{tabularx}
 
-    The $\omega^2$ value for many of these hypothesis was negative, and while this would normally be rounded to 0.00 this has been left as-is\cite{okada2017negative}.
+    The $\omega^2$ value for many of these hypothesis was negative, and while this would normally be rounded to 0.00, this has been left as-is due to recommendations in the cited paper\cite{okada2017negative}.
 
-    Data related to supervisor opinions was unable to be collected due to low uptake by teams \& even lower uptake by the supervisors for those teams. As only seven teams agreed to take part, and of these only two supervisors responded to the questionnaire, it was decided not to pursue these and leave them as avenues for future research.
+    Several of our initial hypothesis, \ref{h_supconfidence} and \ref{h_supteamconfidence}, related to the supervisors opinions and confidence with regards to their team. This data was unable to be collected due to low uptake by teams \& even lower uptake by the supervisors for those teams. As only seven teams agreed to take part, and of these only two supervisors responded to the questionnaire, it was decided not to pursue these hypothesis and leave them as avenues for future research.
 
-    \subsection{The use of a CD pipeline will increase a supervisors confidence in their team's ability to deliver a new, working build each week, compared to team's not using a CD pipeline.}
-        No Data Collected as discussed above.
+    \subsection*{The Results For Each Hypothesis}
+        \subsubsection{The use of a CD pipeline will increase a supervisors confidence in their team's ability to deliver a new, working build each week, compared to team's not using a CD pipeline.}
+            No data collected, as discussed above.
 
-    \subsection{The team's confidence and the supervisors confidence in being able to achieve everything within the scope of the project will be much more closely related with the use of a CD pipeline.}
-        While supervisor data was not collected so a comparison can not be made, data regarding the team's confidence in their own scope was recorded. Pr($>$F) of 0.94, so ~94\% chance observed effect could be random, which is not statistically significant. The statistical power was -0.04.
+        \subsection{The team's confidence and the supervisors confidence in being able to achieve everything within the scope of the project will be much more closely related with the use of a CD pipeline.}
+            While supervisor data was not collected so a comparison can not be made, data regarding the team's confidence in their own scope was recorded. Pr($>$F) of 0.94, so there is a ~94\% chance that the observed effect could be from random chance, which is not statistically significant. The statistical power of this result was -0.04.
 
-    \subsection{A CD pipeline will help developers understand the current state of the project}
-        Pr($>$F) of 0.68, so ~68\% chance observed effect could be random, which is not statistically significant. The statistical power was -0.04.
+        \subsection{A CD pipeline will help developers understand the current state of the project}
+            Pr($>$F) of 0.68, so there is a ~68\% chance that the observed effect could be from random chance, which is not statistically significant. The statistical power of this result was -0.04.
 
-    \subsection{A CD pipeline will help developers to always know why the work they are doing is being done}
-        Pr($>$F) of 0.707, so ~71\% chance observed effect could be random, which is not statistically significant. The statistical power was -0.04.
+        \subsection{A CD pipeline will help developers to always know why the work they are doing is being done}
+            Pr($>$F) of 0.707, so there is a ~71\% chance that the observed effect could be from random chance, which is not statistically significant. The statistical power of this result was -0.04.
 
-    \subsection{A team using a CD pipeline will refine their scope more often}
-        Pr($>$F) of 0.0284 *, so ~3\% chance observed effect could be random, which is statistically significant. The size of this observed difference is also large, with an effect size of 0.16.
+        \subsection{A team using a CD pipeline will refine their scope more often}
+            Pr($>$F) of 0.0284 *, so there is a ~3\% chance that the observed effect could be from random chance, which is statistically significant. The size of this observed difference is also large, with an effect size of 0.16.
 
-    \subsection{A team using a CD pipeline will do more playtesting}
-        Pr($>$F) of 1, so 100\% chance observed change could be random. The statistical power was -0.04.
+        \subsection{A team using a CD pipeline will do more playtesting}
+            Pr($>$F) of 1, so there is a 100\% chance that the observed change could be from random chance, which is not statistically significant. The statistical power of this result was -0.04.
 
 \section{Discussion of results}
     With an initial uptake of 7 teams and 34 people, and 27 responses to the questionnaires over four lots of data collection, the limited usefulness of the gathered results is no surprise. It is encouraging, however, to see some statistically significant results. Given the variation in the other results it is possible that further investigation with a larger sample size could still yield interesting results, as we are unable to rule out it does have an effect with our sample size.
