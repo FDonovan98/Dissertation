@@ -1,4 +1,5 @@
 from ast import Not
+# from asyncio.windows_events import NULL
 import csv
 import hashlib
 from random import random
@@ -192,19 +193,29 @@ def CreateParsedStudentData(controlDataPath, experimentalDataPath, outputDataPat
 
     WriteDataToOutputFile(outputDataPath, combined)
 
-# Generates a lookup table, mapping individual participants to their team.
-teamLookupTable = GenerateLookupTable('Participants.csv')
+def ParseStudentData():
+    # Generates a lookup table, mapping individual participants to their team
+    global teamLookupTable 
+    teamLookupTable  = GenerateLookupTable('Participants.csv')
 
-# # Set file path's
-# controlDataPath = 'Dissertation Survey - Supervisor Version N.csv'
-# experimentalDataPath = 'Dissertation Survey - Supervisor Version P_(1-2)(1).csv'
-# outputDataPath = 'parsed_supervisor_results.csv'
-# CreateParsedSupervisorData(
-#     controlDataPath, experimentalDataPath, outputDataPath)
+    # Set file path's
+    controlDataPath = 'Dissertation Survey - Student Version N.csv'
+    experimentalDataPath = 'Dissertation Survey - Student Version P.csv'
+    outputDataPath = 'parsed_student_results.csv'
+    CreateParsedStudentData(
+        controlDataPath, experimentalDataPath, outputDataPath)
 
-# Set file path's
-controlDataPath = 'Dissertation Survey - Student Version N.csv'
-experimentalDataPath = 'Dissertation Survey - Student Version P.csv'
-outputDataPath = 'parsed_student_results.csv'
-CreateParsedStudentData(
-    controlDataPath, experimentalDataPath, outputDataPath)
+def ParseTestData():
+    # Generates a lookup table, mapping individual participants to their team.
+    global teamLookupTable 
+    teamLookupTable = GenerateLookupTable('testparticipants.csv')
+
+    # Set file path's
+    controlDataPath = 'testdata_N.csv'
+    experimentalDataPath = 'testdata_P.csv'
+    outputDataPath = 'parsed_test_results.csv'
+    CreateParsedStudentData(
+        controlDataPath, experimentalDataPath, outputDataPath)
+
+# ParseStudentData()
+ParseTestData()
