@@ -1,25 +1,29 @@
 # Reads in data from parsed .csv
-testData <- read.csv("data_analysis/parsed_student_results.csv", header = TRUE, colClasses = c("factor", "factor", "factor", "numeric", "numeric", "numeric", "numeric", "numeric"))
+# Data analysis on test data
+data <- read.csv("data_analysis/parsed_test_results.csv", header = TRUE, colClasses = c("factor", "factor", "factor", "numeric", "numeric", "numeric", "numeric", "numeric"))
+
+# Data analysis on student data
+# data <- read.csv("data_analysis/parsed_student_results.csv", header = TRUE, colClasses = c("factor", "factor", "factor", "numeric", "numeric", "numeric", "numeric", "numeric"))
 
 library(AICcmodavg)
 
 # Goes through each independent variable and runs data analysis
 for (i in 4:8) {
     # as.formula is used so that this code can be generalised enough to work in a loop
-    formula <- as.formula(paste0(paste(names(testData)[i]), " ~ isExperimental"))
-    oneway <- aov(formula, data = testData)
+    formula <- as.formula(paste0(paste(names(data)[i]), " ~ isExperimental"))
+    oneway <- aov(formula, data = data)
 
-    formula <- as.formula(paste0(paste(names(testData)[i]), " ~ isExperimental + team"))
-    twoway <- aov(formula, data = testData)
+    formula <- as.formula(paste0(paste(names(data)[i]), " ~ isExperimental + team"))
+    twoway <- aov(formula, data = data)
 
-    formula <- as.formula(paste0(paste(names(testData)[i]), " ~ isExperimental * team + id"))
-    blocking <- aov(formula, data = testData)
+    formula <- as.formula(paste0(paste(names(data)[i]), " ~ isExperimental * team + id"))
+    blocking <- aov(formula, data = data)
 
     model.set <- list(oneway, twoway, blocking)
     model.names <- c("oneway", "twoway", "blocking")
 
     # Prints results from data analysis
-    print(names(testData)[i])
+    print(names(data)[i])
     print(summary(oneway))
     # Calculates effect size
     print(effectsize::omega_squared(oneway))
@@ -27,9 +31,9 @@ for (i in 4:8) {
     print(aictab(model.set, modnames = model.names))
 }
 
-# formula <- as.formula(paste0(paste(names(testData)[7]), " ~ isExperimental"))
-# oneway <- aov(formula, data = testData)
-# print(names(testData)[7])
+# formula <- as.formula(paste0(paste(names(data)[7]), " ~ isExperimental"))
+# oneway <- aov(formula, data = data)
+# print(names(data)[7])
 # print(summary(oneway))
 # print(effectsize::cohens_f(oneway))
 # effectsize::eta_squared(oneway)
@@ -45,12 +49,12 @@ for (i in 4:8) {
 # effectsize::cohens_f(oneway)
 
 # library(ggplot2)
-# onewayplot <- ggplot(testData, aes(x = isExperimental, y = scopeFrequency)) +
+# onewayplot <- ggplot(data, aes(x = isExperimental, y = scopeFrequency)) +
 #     geom_point(cex = 1.5, pch = 1.0, position = position_jitter(w = 0.1, h = 0))
 
 # onewayplot <- onewayplot +
 #     stat_summary(fun.data = "mean_se", geom = "errorbar", width = 0.2) +
 #     stat_summary(fun.data = "mean_se", geom = "pointrange") +
-#     geom_point(data = testData, aes(x = isExperimental, y = scopeFrequency))
+#     geom_point(data = data, aes(x = isExperimental, y = scopeFrequency))
 
 # onewayplot
