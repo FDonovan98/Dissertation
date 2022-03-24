@@ -39,6 +39,7 @@ jobs:
           git add .
           git reset --hard
 
+      # game-ci couldn't find _temp/ so manually create it
       - name: Create temp
         run: |
           echo $USER
@@ -59,10 +60,10 @@ jobs:
           git reset --hard
           git clean -fdx
 
-
       - name: Build Project
         uses: game-ci/unity-builder@v2
         env:
+          # Unity details stored using github secrets
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
           UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
