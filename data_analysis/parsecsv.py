@@ -3,6 +3,7 @@ from ast import Not
 import csv
 import hashlib
 from random import random
+import filecmp
 
 # Reads data from .csv file, including only wanted columns
 def ParseData(filePath, validColumns, columnHeaders):
@@ -217,5 +218,15 @@ def ParseTestData():
     CreateParsedStudentData(
         controlDataPath, experimentalDataPath, outputDataPath)
 
+
+# 'expected_parsed_results.csv' created by hand from test data
+def CheckCreatedAgainstExpected():
+    if (filecmp.cmp('expected_parsed_results.csv', 'parsed_test_results.csv', shallow=False)):
+        print("Files verified")
+
+def Verify():
+    ParseTestData()
+    CheckCreatedAgainstExpected()
+
 # ParseStudentData()
-ParseTestData()
+Verify()
