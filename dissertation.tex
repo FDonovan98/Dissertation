@@ -106,30 +106,27 @@ This is purposefully broad, with the aim of encouraging and supporting further r
 
 \section{Artifact}
 % LACK OF CLARITY ON SPECIFIC DESIGN OF MY INTERVENTION AND SUPPORT PROVIDED TO TEAM'S AND WHAT SPECIFIC INTERVENTION IN. DETAIL SHOULD BE SUFFICIENT FOR SOMEONE TO BE ABLE TO GO AWAY AND REPLICATE (STANDARD SCIENTIFIC RIGOUR)
-The artifact to be produced will be the Continuous Delivery pipeline that will be supplied to the experimental team's. This will be designed to take advantage of the version control software used within Falmouth University Games Academy, Github Enterprise\cite{gitenterprise}. This pipeline will be built using Github Actions\cite{gitactions}, an automation system built into Github, and GameCI\cite{gameci}, a CI/ CD api designed for automated build and testing of Unity projects. The pipeline shall consist of 5 main stages. These are detailed below, and the pipeline flow is shown in the Appendix, figure \ref{CDflow}. This flow can be seen in action on a live project at the following link: \url{https://github.falmouth.ac.uk/Glass-Nomad-Games/Silverback}, and the source code is listed in the Appendix, listing \ref{SCPullRequest} and listing \ref{SCBuildTest}.\\
+The artifact to be produced will be the Continuous Delivery pipeline that will be supplied to the experimental team's. This will be designed to take advantage of the version control software used within Falmouth University Games Academy, Github Enterprise\cite{gitenterprise}. This pipeline will be built using Github Actions\cite{gitactions}, an automation system built into Github, and GameCI\cite{gameci}, a CI/ CD api designed for automated build and testing of Unity projects. The pipeline shall consist of 5 main stages. These are detailed below, and the pipeline flow is shown in the Appendix, figure \ref{CDflow}. The source code is included in the Appendix, listing \ref{SCPullRequest} and listing \ref{SCBuildTest}, as well as being available along with this dissertation at \url{https://github.com/FDonovan98/Dissertation}. The pipeline was developed in a standalone project at \url{https://github.falmouth.ac.uk/Glass-Nomad-Games/Testing-Workflows}, and can be seen being used in a live project at \url{https://github.falmouth.ac.uk/Glass-Nomad-Games/Silverback}, however these links will only be viewable by faculty of Falmouth University Games Academy due to them being hosted on an internal server. The five stages of the pipeline are listed below:\\
 
 \subsubsection*{Generate daily pull request}
 At midnight each night the main branch is compared against the stable branch. If main is ahead of stable then a pull request is created.\\
 
 \subsubsection*{Unit tests}
-% COULD ALSO TALK ABOUT TESTS FOR STATISTICAL ANALYSIS CODE
 Any tests included with the project are then run. These could include frame rate benchmarking, weapon testing, or spawn testing.\\
 
-\subsubsection*{Generate and upload build}
-Once all unit tests pass, a build is then created and uploaded as a Github artifact\cite{gitartifacts}. This could also be expanded to include automatic uploading to Steam, as done on the live project above, using the Steamworks SDK\cite{steamupload} or to Itch using Butler\cite{itchupload}, but is potentially out of scope for the current project.\\
+\subsubsection*{Generate Build}
+Once all unit tests pass, a build is then created using game-ci\cite{gameci}. \\
+
+\subsubsection*{Upload Build}
+After creation, the build is uploaded to the repository as a Github artifact\cite{gitartifacts}. This could also be expanded to include automatic uploading to Steam, as done on the live project above, using the Steamworks SDK\cite{steamupload} or to Itch using Butler\cite{itchupload}, but is potentially out of scope for the current project.\\
 
 \subsubsection*{Merge pull request}
-If the build is created and uploaded successfully, the opened pull request is then merged and closed.\\
-
-
-% make a brief note on quality assurance
-% show off any screenshots or code excerpts
-
-% two repo link - one with artifact to easily show off then give link to show it embedded in main project
+If the build is created and uploaded successfully, the opened pull request is then merged and closed.
 
 \subsection{Development and Quality Assurance}
-The development of this artifact followed an Agile \cite{agilemanifesto} and iterative approach
-% Quality control. Roadmap? Unit Testing? Integration testing?
+The development of this artifact followed an Agile \cite{agilemanifesto} and iterative approach, breaking the problem into multiple stages and solving them one at a time, rather than trying to tackle the entire pipeline immediately. Due to the nature of Github Actions, it was not possible to write unit tests as they could only be run through Github itself. This lead to the use of trial and error testing, making small incremental changes and checking viability, before continuing to iterate. 
+
+This iterative approach, as well as unit tests, were also used when developing the scripts that parsed questionnaire results from Microsoft Teams, and the script that then performed data analysis on this parsed data. Evidence of unit testing can be seen in parsecsv.py, listing \ref{SCParse}, with the function \lstinline{Verify()}. This function parses specific test files and then compares the generated file against the expected result, which is a file which was created and parsed manually. If these files match, then a confirmation is printed to the command line, otherwise an error is printed to the command line.
 
 % \subsection{How will I create it}
 
@@ -191,8 +188,6 @@ We will have two groups, our control group who have no access to a CD pipeline, 
 
 \subsubsection*{Number of measurements}
 We are planning on collecting six sets of measurements, one every two weeks from January through to March.\\
-
-% https://www.datanovia.com/en/lessons/repeated-measures-anova-in-r/
 
 Once data has been collected, it can be parsed using a python script and analysed in R. The data collected in this way will consist of ratings, from 1 to 10, of the team's confidence in the accuracy of their scope, how well they understand the current state of the project, and how often the scope for the project is refined. The supervisor's confidence both in the team being able to present a working build at their next meeting and in being able to finish everything within their scope, rated from 1 to 10, will also be analysed with this method.\\
 There will also be the option for participants to expand on these ratings and give more verbose feedback, which could later be analysed using sentiment analysis\cite{altrabsheh2014sentiment}. \\
@@ -270,14 +265,13 @@ Given these two factors, the project has been deemed medium risk and has such ha
 \section{Discussion of results}
     With an initial uptake of 7 teams and 34 people, and 27 responses to the questionnaires over four lots of data collection, the limited usefulness of the gathered results is no surprise. It is encouraging, however, to see some statistically significant results. Given the variation in the other results it is possible that further investigation with a larger sample size could still yield interesting results, as we are unable to rule out it does have an effect with our sample size. Assuming these results are representative, see Section \ref{IssuesandLimitations} for a discussion on this, we can see that it is very likely there is a relation between whether a team uses a CD pipeline and how often they refine their scope, and that this relationship has a significant effect size.
 
-    % CAN AND SHOULD MAKE CONJECTURE ABOUT WHY EXPECTED RESULTS MAY NOT OF BEEN SEEN
+    The lack of results for the other hypothesis may be an indication that there are other compounding factors that effect the results. For example, for hypothesis \ref{h_playtesting} it would be expected that a team using a CD pipeline would do more playtesting as they always have a latest build available, however it may be that the produced builds are not actually being played, despite being generated daily.
 
 \section{Issues and Limitations} \label{IssuesandLimitations}
     \subsection{A Limited Sample Size}
         The initial analysis indicated a required sample size of 32, which with 34 sign ups was achieved. However over the four times the questionnaire was sent out to participants only 17 unique responses were received, with 25 responses received in total. This small sample size is one of the reasons the results in this study may not be representative of the general population. \\
 
-        % NO DRIVER OR INCENTIVE FOR TEAMS
-        \textit{This next paragraph will be discussing the cause of the above issue, but is conjecture based upon experience. While there may have been other causes, this is just what stood out to the researchers.} This lack of response is believed to have stemmed from a lack of physical interaction between the researcher and the participants. This lack of rapport and accountability, combined with the alternative to in person communication being sending emails to accounts which are rarely checked, meant that few signed up and fewer still responded after signing up.
+        This lack of response is believed to have stemmed from a lack of physical interaction between the researcher and the participants. This lack of rapport and accountability, combined with the alternative to in person communication being sending emails to accounts which are rarely checked, meant that few signed up and fewer still responded after signing up. There was potentially also a lack of incentive for teams to take part due to the limited resources available to the researchers. It was not possible to offer anything such as small financial compensation for participants time, so this is something which, if implemented in future research, may improve response rate. As more research is produced, those results could also be used as incentive if they show a positive correlation between the use of a CD pipeline and team performance.
 
     \subsection{Unbalanced Sample Pool}
         Only a single team involved in the experiment had the pipeline implemented, rather than half of the teams involved. This was due to the difficulty with communication as discussed above. This means that any variation could have been due to random variation, and only having a single experimental team means this wouldn't of been averaged out across the sample.
@@ -291,6 +285,10 @@ Given these two factors, the project has been deemed medium risk and has such ha
 
 \section{Reflective Addendum}
     The results of the research were overall disappointing, suffering from a severe lack of engagement, resources, and time. As discussed in Section \ref{conclusion}, this study would benefit from a longer time frame to collect results, recruit participants, and provide support with the implementation of the CD pipeline.
+
+    Testing and quality assurance for the artifact was light due to the nature of it - github actions can only be tested on a repo through Github, so unit tests are not possible. This lead to a lot of trial and error testing, and the requirement of having to upload the code to github, then wait for the tests to run on the github actions server, was frustratingly slow at times. For future development, it is possible that a small but relatively high spec server set up specifically for testing Github Actions code would help to speed up this process significantly. This would allow the tests to run much faster, as well as prevent tests being stuck in queue behind longer, in-production Github Action processes.
+    
+    The other written code, the data analysis in R and the python parsing, was heavy on iterative testing but light on structured unit testing. This was due to both of these scripts being exploratory in nature, and were they to be rewritten a comprehensive test suite could likely be made. With the simplicity of both of these scripts that is likely to be of limited use however, and writing the tests would likely take longer than writing the actual code. While if they were actually of significant importance, for example a key piece of software in a production environment, that would be worth the time investment, for their current use it would likely be wasted effort, especially given the tight time constraint the dissertation as a whole is produced under.
 
 % CHECK OUT EDUCATION ROUNDTABLE AT GDC FOR SOFTWARE ENGINEERING, IF COULD LINK TO CONTEMPORARY ISSUES WITHIN EDUCATION WILL HELP WITH TIMELINESSs
 \bibliographystyle{IEEEtran}
@@ -309,6 +307,6 @@ Given these two factors, the project has been deemed medium risk and has such ha
 
 \lstinputlisting[language=python, label=SCParse, caption=Python code that parses the results .csv generated by Microsoft Forms and exports only the useful data to a new .csv. User details are also encrypted., captionpos=b]{data_analysis/parsecsv.py}
 
-\lstinputlisting[language =R, linerange=1-20, label=SCRAnalysis, caption =R code to perform ANOVA tests upon results after file is parsed with Python. Best fit analysis is then performed upon these tests., captionpos =b]{data_analysis/stat_analysis.r}
+\lstinputlisting[language =R, label=SCRAnalysis, caption =R code to perform ANOVA tests upon results after file is parsed with Python. Best fit analysis is then performed upon these tests., captionpos =b]{data_analysis/stat_analysis.r}
 
 \end{document}

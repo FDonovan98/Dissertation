@@ -223,6 +223,8 @@ def ParseTestData():
 def CheckCreatedAgainstExpected():
     if (filecmp.cmp('expected_parsed_results.csv', 'parsed_test_results.csv', shallow=False)):
         print("Files verified")
+    else:
+        print("ERROR: File did not verify")
 
 def Verify():
     ParseTestData()
