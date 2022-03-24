@@ -88,6 +88,7 @@ def MarkDataAsExperimental(isExperimental, data, header):
 def CombineData(dataA, dataB):
     return dataA + dataB
 
+# Uses generated lookup table to assign each participant to the correct team
 def SetTeams(data, header):
     data[0].insert(1, header)
     for i in range(1, len(data)):
@@ -141,7 +142,8 @@ def GenerateLookupTable(filePath):
     parsedData = SimpleParse(filePath)
     return parsedData
 
-
+# Maps a verbose value in a specific column to a numeric value.
+# This is needed for the data analysis in R.
 def ConvertVerboseToNumeric(data, columnIndex, verboseArray):
     y = 0
     entryConverted = True
@@ -159,7 +161,9 @@ def ConvertVerboseToNumeric(data, columnIndex, verboseArray):
 
     return data
 
+# Parses student data, only data relevant to the R data analysis is included in the output file.
 def CreateParsedStudentData(controlDataPath, experimentalDataPath, outputDataPath):
+    # Defines columns to be included in the output file
     validColumns = [3, 10, 16, 22, 25, 28]
     columnHeaders = [['id', 'scopeConfidence', 'stateUnderstanding', 'contributionUnderstanding', 'scopeFrequency', 'playtestFrequency']]
     
@@ -168,6 +172,7 @@ def CreateParsedStudentData(controlDataPath, experimentalDataPath, outputDataPat
     experimentalData = MarkDataAsExperimental(
     True, experimentalData, 'isExperimental')
 
+    # Defines columns to be included in the output file
     validColumns = [3, 10, 16, 22, 25, 28]
     columnHeaders = False
 
@@ -187,6 +192,7 @@ def CreateParsedStudentData(controlDataPath, experimentalDataPath, outputDataPat
 
     WriteDataToOutputFile(outputDataPath, combined)
 
+# Generates a lookup table, mapping individual participants to their team.
 teamLookupTable = GenerateLookupTable('Participants.csv')
 
 # # Set file path's
@@ -202,10 +208,3 @@ experimentalDataPath = 'Dissertation Survey - Student Version P.csv'
 outputDataPath = 'parsed_student_results.csv'
 CreateParsedStudentData(
     controlDataPath, experimentalDataPath, outputDataPath)
-
-# TODO:
-# - script to parse student data as this only does supervisor sheet
-# - student sheet will need to be related to a supervisor before encoding
-# - dictionary of all supervisor email's
-# - NONONO way overcomplicating it
-# - just include a field on each survey to select the team & hash with that. so much simpler

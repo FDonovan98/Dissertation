@@ -1,8 +1,11 @@
+# Reads in data from parsed .csv
 testData <- read.csv("data_analysis/parsed_student_results.csv", header = TRUE, colClasses = c("factor", "factor", "factor", "numeric", "numeric", "numeric", "numeric", "numeric"))
 
 library(AICcmodavg)
 
+# Goes through each independent variable and runs data analysis
 for (i in 4:8) {
+    # as.formula is used so that this code can be generalised enough to work in a loop
     formula <- as.formula(paste0(paste(names(testData)[i]), " ~ isExperimental"))
     oneway <- aov(formula, data = testData)
 
@@ -15,36 +18,39 @@ for (i in 4:8) {
     model.set <- list(oneway, twoway, blocking)
     model.names <- c("oneway", "twoway", "blocking")
 
+    # Prints results from data analysis
     print(names(testData)[i])
     print(summary(oneway))
+    # Calculates effect size
     print(effectsize::omega_squared(oneway))
+    # Check which model fits the data the best
     print(aictab(model.set, modnames = model.names))
 }
 
-formula <- as.formula(paste0(paste(names(testData)[7]), " ~ isExperimental"))
-oneway <- aov(formula, data = testData)
-print(names(testData)[7])
-print(summary(oneway))
-print(effectsize::cohens_f(oneway))
-effectsize::eta_squared(oneway)
-effectsize::omega_squared(oneway)
-par(mfrow = c(2, 2))
-plot(oneway)
-par(mfrow = c(1, 1))
+# formula <- as.formula(paste0(paste(names(testData)[7]), " ~ isExperimental"))
+# oneway <- aov(formula, data = testData)
+# print(names(testData)[7])
+# print(summary(oneway))
+# print(effectsize::cohens_f(oneway))
+# effectsize::eta_squared(oneway)
+# effectsize::omega_squared(oneway)
+# par(mfrow = c(2, 2))
+# plot(oneway)
+# par(mfrow = c(1, 1))
 
-tukey <- TukeyHSD(oneway)
-tukey
+# tukey <- TukeyHSD(oneway)
+# tukey
 
-library(sjstats)
-effectsize::cohens_f(oneway)
+# library(sjstats)
+# effectsize::cohens_f(oneway)
 
-library(ggplot2)
-onewayplot <- ggplot(testData, aes(x = isExperimental, y = scopeFrequency)) +
-    geom_point(cex = 1.5, pch = 1.0, position = position_jitter(w = 0.1, h = 0))
+# library(ggplot2)
+# onewayplot <- ggplot(testData, aes(x = isExperimental, y = scopeFrequency)) +
+#     geom_point(cex = 1.5, pch = 1.0, position = position_jitter(w = 0.1, h = 0))
 
-onewayplot <- onewayplot +
-    stat_summary(fun.data = "mean_se", geom = "errorbar", width = 0.2) +
-    stat_summary(fun.data = "mean_se", geom = "pointrange") +
-    geom_point(data = testData, aes(x = isExperimental, y = scopeFrequency))
+# onewayplot <- onewayplot +
+#     stat_summary(fun.data = "mean_se", geom = "errorbar", width = 0.2) +
+#     stat_summary(fun.data = "mean_se", geom = "pointrange") +
+#     geom_point(data = testData, aes(x = isExperimental, y = scopeFrequency))
 
-onewayplot
+# onewayplot
