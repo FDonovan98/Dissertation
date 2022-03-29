@@ -244,19 +244,19 @@ Given these two factors, the project has been deemed medium risk and has such ha
             No data collected, as discussed above. \\
 
         \subsubsection{The team's confidence and the supervisors confidence in being able to achieve everything within the scope of the project will be much more closely related with the use of a CD pipeline}
-            While supervisor data was not collected so a comparison can not be made, data regarding the team's confidence in their own scope was recorded. Pr($>$F) of 0.94, so there is a ~94\% chance that the observed effect could be from random chance, which is not statistically significant. F = 0.006, $\omega^2$ = -0.04. \\
+            While supervisor data was not collected so a comparison can not be made, data regarding the team's confidence in their own scope was recorded. Pr($>$F) of 0.94. So, if we assume that there is no effect, there would be a 94\% probability of making these (or more extreme) observations. Thus, as this is larger than the conventional 5\% tolerance, the hypothesis was rejected. F = 0.006, $\omega^2$ = -0.04. \\
 
         \subsubsection{A CD pipeline will help developers understand the current state of the project}
-            The one-way ANOVA test resulted in a Pr($>$F) of 0.68, so there is a ~68\% chance that the observed effect could be from random chance, which is not statistically significant. F = 0.175, $\omega^2$ = -0.04. \\
+            The one-way ANOVA test resulted in a Pr($>$F) of 0.68. So, if we assume that there is no effect, there would be a 68\% probability of making these (or more extreme) observations. Thus, as this is larger than the conventional 5\% tolerance, the hypothesis was rejected. F = 0.175, $\omega^2$ = -0.04. \\
 
         \subsubsection{A CD pipeline will help developers to always know why the work they are doing is being done}
-            Pr($>$F) of 0.707, so there is a ~71\% chance that the observed effect could be from random chance, which is not statistically significant. F = 0.145, $\omega^2$ = -0.04. \\
+            Pr($>$F) of 0.707. So, if we assume that there is no effect, there would be a 71\% probability of making these (or more extreme) observations. Thus, as this is larger than the conventional 5\% tolerance, the hypothesis was rejected. F = 0.145, $\omega^2$ = -0.04. \\
 
         \subsubsection{A team using a CD pipeline will refine their scope more often}
-            Pr($>$F) of 0.0284 *, so there is a ~3\% chance that the observed effect could be from random chance, which is statistically significant. F = 5.5, $\omega^2$ = 0.16, which is a large effect size. \\
+            Pr($>$F) of 0.0284 *. So, if we assume that there is no effect, there would be a 2.8\% probability of making these (or more extreme) observations. Thus, this is smaller than the conventional 5\% tolerance, the hypothesis was accepted. F = 5.5, $\omega^2$ = 0.16, which is a large effect size. \\
 
         \subsubsection{A team using a CD pipeline will do more playtesting}
-            Pr($>$F) of 1, so there is a 100\% chance that the observed change could be from random chance, which is not statistically significant. F = 0, $\omega^2$ = -0.04. \\
+            Pr($>$F) of 1. So, if we assume that there is no effect, there would be a 100\% probability of making these (or more extreme) observations. Thus, as this is larger than the conventional 5\% tolerance, the hypothesis was rejected. F = 0, $\omega^2$ = -0.04. \\
 
 \section{Discussion of results}
     With an initial uptake of 7 teams and 34 people, and 27 responses to the questionnaires over four lots of data collection, the limited usefulness of the gathered results is no surprise. It is encouraging, however, to see some statistically significant results. Given the variation in the other results it is possible that further investigation with a larger sample size could still yield interesting results, as we are unable to rule out it does have an effect with our sample size. Assuming these results are representative, see Section \ref{IssuesandLimitations} for a discussion on this, we can see that it is very likely there is a relation between whether a team uses a CD pipeline and how often they refine their scope, and that this relationship has a significant effect size.
@@ -280,23 +280,25 @@ Given these two factors, the project has been deemed medium risk and has such ha
     For the technical concern, game development team's within Falmouth University Games Academy are not the same each year, they are quasi-randomised. This would mean it would be practically impossible to track the same 'team' across multiple years. Potentially, individuals who have taken part in the study could be tracked, even if their team was not selected as an experimental group in the following year. Seeing if these individuals then implement their own CD pipelines could be a revealing statistic to look at as it could give a measure of \textit{perceived} value, if not actual value. If this did occur regularly however then control groups would effectively be becoming experimental groups, potentially making a statistically sound comparison harder. \\
     The potential ethical concern is due to this initial study pointing towards potential benefits and advantages for teams that utilise CD. This could mean that teams not involved in the study, or selected as control groups, could be disadvantaged both in terms of the product they produce and the grade they receive. While one solution could be to make the potential benefits clear to all students when recruiting, so they are able to give informed consent, a better solution may be a redesign of the experimental methodology. If the research is run over a longer period, such as an entire academic year as recommended above, then data could be gathered for the first half of the year with no teams having the CD pipeline. Then, all teams are introduced to the CD pipeline at the same time, and further data is collected. This research only did not follow that methodology due to time constraints, and it would likely be better at accounting for random variation and would present less ethical problems as all teams are treated equally.
 
+    
+    % CHECK OUT EDUCATION ROUNDTABLE AT GDC FOR SOFTWARE ENGINEERING, IF COULD LINK TO CONTEMPORARY ISSUES WITHIN EDUCATION WILL HELP WITH TIMELINESSs
+    \bibliographystyle{IEEEtran}
+    \bibliography{bibliography}
+    
+    \section{Appendix}
+    \begin{figure}
+        \includegraphics[width=0.95\columnwidth]{Images/CD.png}
+        \caption{A diagram showing the flow of the Continuous Delivery system}
+        \label{CDflow}
+    \end{figure}
+    
+% Need to add smart actions for a pass
 \section{Reflective Addendum}
     The results of the research were overall disappointing, suffering from a severe lack of engagement, resources, and time. As discussed in Section \ref{conclusion}, this study would benefit from a longer time frame to collect results, recruit participants, and provide support with the implementation of the CD pipeline.
 
     Testing and quality assurance for the artifact was light due to the nature of it - github actions can only be tested on a repo through Github, so unit tests are not possible. This lead to a lot of trial and error testing, and the requirement of having to upload the code to github, then wait for the tests to run on the github actions server, was frustratingly slow at times. For future development, it is possible that a small but relatively high spec server set up specifically for testing Github Actions code would help to speed up this process significantly. This would allow the tests to run much faster, as well as prevent tests being stuck in queue behind longer, in-production Github Action processes.
     
     The other written code, the data analysis in R and the python parsing, was heavy on iterative testing but light on structured unit testing. This was due to both of these scripts being exploratory in nature, and were they to be rewritten a comprehensive test suite could likely be made. With the simplicity of both of these scripts that is likely to be of limited use however, and writing the tests would likely take longer than writing the actual code. While if they were actually of significant importance, for example a key piece of software in a production environment, that would be worth the time investment, for their current use it would likely be wasted effort, especially given the tight time constraint the dissertation as a whole is produced under.
-
-% CHECK OUT EDUCATION ROUNDTABLE AT GDC FOR SOFTWARE ENGINEERING, IF COULD LINK TO CONTEMPORARY ISSUES WITHIN EDUCATION WILL HELP WITH TIMELINESSs
-\bibliographystyle{IEEEtran}
-\bibliography{bibliography}
-
-\section{Appendix}
-\begin{figure}
-    \includegraphics[width=0.95\columnwidth]{Images/CD.png}
-    \caption{A diagram showing the flow of the Continuous Delivery system}
-    \label{CDflow}
-\end{figure}
 
 \lstinputlisting[label=SCPullRequest, caption =Github Actions code to open a pull request from 'main' branch to 'stable/daily' branch at midnight each weeknight, captionpos=b]{Actions/.github/workflows/createPull.yml}
 
