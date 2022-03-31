@@ -30,3 +30,28 @@ for (i in 4:8) {
     # Check which model fits the data the best
     print(aictab(model.set, modnames = model.names))
 }
+
+# names(data)[7] relates to scope frequency
+# Generate bar plot with error bars as this is the only hypothesis to reach statistical significance
+formula <- as.formula(paste0(paste(names(data)[7]), " ~ isExperimental"))
+oneway <- aov(formula, data = data)
+
+# Test for homoscedasticity as aov analysis relies on that assumption being true
+par(mfrow = c(2, 2))
+plot(oneway)
+
+library(ggplot2)
+
+# Plot data
+onewayplot <- ggplot(data, aes(x = isExperimental, y = scopeFrequency)) +
+    geom_point(cex = 1.5, pch = 1.0, position = position_jitter(w = 0.1, h = 0))
+
+# Generate and plot box and whisker diagram for the data
+onewayplot <- onewayplot + stat_summary(fun.data = "mean_se", geom = "errorbar", width = 0.2) + stat_summary(fun.data = "mean_se", geom = "pointrange") + geom_point(data = data, aes(x = isExperimental, y = scopeFrequency))
+
+# Add titles and better axis labels to the graph
+onewayplot <- onewayplot +
+    labs(title = "Rescope frequency with relatation to a teams use of a CD pipeline", x = "Does the team use a CD pipeline? (True = Yes, False = No)", y = "Frequency of rescoping \n (1 = Only at events, 2 = Every other sprint, 3 = Once per sprint, 4 = Multiple times per sprint)")
+
+# Generate graph
+onewayplot

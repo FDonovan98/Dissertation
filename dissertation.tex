@@ -253,7 +253,7 @@ Given these two factors, the project has been deemed medium risk and has such ha
             Pr($>$F) of 0.707. So, if we assume that there is no effect, there would be a 71\% probability of making these (or more extreme) observations. Thus, as this is larger than the conventional 5\% tolerance, the hypothesis was rejected. F = 0.145, $\omega^2$ = -0.04. \\
 
         \subsubsection{A team using a CD pipeline will refine their scope more often}
-            Pr($>$F) of 0.0284 *. So, if we assume that there is no effect, there would be a 2.8\% probability of making these (or more extreme) observations. Thus, this is smaller than the conventional 5\% tolerance, the hypothesis was accepted. F = 5.5, $\omega^2$ = 0.16, which is a large effect size. \\
+            Pr($>$F) of 0.0284 *. So, if we assume that there is no effect, there would be a 2.8\% probability of making these (or more extreme) observations. Thus, this is smaller than the conventional 5\% tolerance, the hypothesis was accepted. F = 5.5, $\omega^2$ = 0.16, which is a large effect size. As this hypothesis was accepted, the data was analysed to see if it fits the assumption of homoscedasticity, see Figure \ref{scopeFrequencyHomoscedasticity}, and a box and whisker diagram was generated, see Figure \ref{scopeFrequencyPlot}.\\
 
         \subsubsection{A team using a CD pipeline will do more playtesting}
             Pr($>$F) of 1. So, if we assume that there is no effect, there would be a 100\% probability of making these (or more extreme) observations. Thus, as this is larger than the conventional 5\% tolerance, the hypothesis was rejected. F = 0, $\omega^2$ = -0.04. \\
@@ -285,8 +285,19 @@ Given these two factors, the project has been deemed medium risk and has such ha
     \bibliographystyle{IEEEtran}
     \bibliography{bibliography}
     
-    \section{Appendix}
-    \begin{figure}
+    \section{Appendix} \label{appendix}
+    \begin{figure}[h!]
+        \includegraphics[width=0.95\columnwidth]{Images/scopeFrequencyHomoscedasticity.png}
+        \caption{Homoscedasticity analysis graphs for the data relating to hypothesis \ref{h_scoperefine}}
+        \label{scopeFrequencyHomoscedasticity}
+    \end{figure}
+    \begin{figure}[h!]
+        \includegraphics[width=0.95\columnwidth]{Images/scopeFrequencyPlot.png}
+        \caption{A box and whisker plot showing the data relating to hypothesis \ref{h_scoperefine}}
+        \label{scopeFrequencyPlot}
+    \end{figure}
+
+    \begin{figure}[h!]
         \includegraphics[width=0.95\columnwidth]{Images/CD.png}
         \caption{A diagram showing the flow of the Continuous Delivery system}
         \label{CDflow}
